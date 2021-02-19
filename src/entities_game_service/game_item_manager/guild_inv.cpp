@@ -137,9 +137,9 @@ void CGuildInventoryView::updateClientSlot(uint32 slot)
 	itemSlot.setItemProp( INVENTORIES::Quality, item->quality() );
 	itemSlot.setItemProp( INVENTORIES::Quantity, item->getStackSize() );
 	itemSlot.setItemProp( INVENTORIES::UserColor, item->color() );
-	itemSlot.setItemProp( INVENTORIES::CharacBuffs, item->buffFlags() );
+	// itemSlot.setItemProp( INVENTORIES::CharacBuffs, item->buffFlags() );
 	itemSlot.setItemProp( INVENTORIES::Locked, 0 );
-	itemSlot.setItemProp( INVENTORIES::Access, item->getAccessGrade() );
+	// itemSlot.setItemProp( INVENTORIES::Access, item->getAccessGrade() );
 	itemSlot.setItemProp( INVENTORIES::Weight, item->weight() / 10 );
 	itemSlot.setItemProp( INVENTORIES::NameId, 0 ); // TODO: send name to all guild members (item->sendNameId())
 	itemSlot.setItemProp( INVENTORIES::Enchant, item->getClientEnchantValue() );
