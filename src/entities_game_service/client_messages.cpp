@@ -413,7 +413,7 @@ void cbClientItemRename(NLNET::CMessage &msgin, const std::string &serviceName, 
 
 	if (literal)
 	{
-		text = capitalizeFirst(text); // Require first character to be capitalized
+		// text = capitalizeFirst(text); // Require first character to be capitalized
 
 		if (text.size() >= 255) // Limit literal text length
 			text = text.substr(0, 255);
