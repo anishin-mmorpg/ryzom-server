@@ -1151,7 +1151,7 @@ void CGameItem::setLockedByOwner(bool value)
 	if (value != _LockedByOwner)
 	{
 		_LockedByOwner = value;
-		callItemChanged(INVENTORIES::TItemChangeFlags(INVENTORIES::itc_owner_locked));
+		// callItemChanged(INVENTORIES::TItemChangeFlags(INVENTORIES::itc_owner_locked));
 	}
 }
 
@@ -1160,7 +1160,7 @@ void CGameItem::setAccessGrade(EGSPD::CGuildGrade::TGuildGrade value)
 	if (value != _AccessGrade)
 	{
 		_AccessGrade = value;
-		callItemChanged(INVENTORIES::TItemChangeFlags(INVENTORIES::itc_access_grade));
+		// callItemChanged(INVENTORIES::TItemChangeFlags(INVENTORIES::itc_access_grade));
 	}
 }
 
@@ -1169,7 +1169,7 @@ void CGameItem::setPhraseId(const std::string &str, bool literal)
 	if (literal != _PhraseLiteral || _PhraseId != str)
 	{
 		setPhraseIdInternal(str, literal);
-		callItemChanged(INVENTORIES::TItemChangeFlags(INVENTORIES::itc_name));
+		// callItemChanged(INVENTORIES::TItemChangeFlags(INVENTORIES::itc_name));
 	}
 }
 
