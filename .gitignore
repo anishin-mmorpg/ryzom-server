@@ -1,0 +1,6 @@
+*.log
+*.state
+*.start_count
+*_report.txt
+*_state.txt
+save_shard/
