@@ -1226,9 +1226,9 @@ void CBankAccessor_PLR::TEXCHANGE::TGIVE::TArray::init(ICDBStructNode *parent, u
 	nlassert(node != NULL);
 	_PREREQUISIT_VALID = node;
 	
-	node  = parent->getNode( ICDBStructNode::CTextId("WORNED"), false );
-	nlassert(node != NULL);
-	_WORNED = node;
+	// node  = parent->getNode( ICDBStructNode::CTextId("WORNED"), false );
+	// nlassert(node != NULL);
+	// _WORNED = node;
 	
 	node  = parent->getNode( ICDBStructNode::CTextId("INFO_VERSION"), false );
 	nlassert(node != NULL);
@@ -1313,9 +1313,9 @@ void CBankAccessor_PLR::TEXCHANGE::TRECEIVE::TArray::init(ICDBStructNode *parent
 	nlassert(node != NULL);
 	_PREREQUISIT_VALID = node;
 	
-	node  = parent->getNode( ICDBStructNode::CTextId("WORNED"), false );
-	nlassert(node != NULL);
-	_WORNED = node;
+	// node  = parent->getNode( ICDBStructNode::CTextId("WORNED"), false );
+	// nlassert(node != NULL);
+	// _WORNED = node;
 	
 	node  = parent->getNode( ICDBStructNode::CTextId("INFO_VERSION"), false );
 	nlassert(node != NULL);
