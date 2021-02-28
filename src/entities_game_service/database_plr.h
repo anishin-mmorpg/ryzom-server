@@ -9202,7 +9202,7 @@ inline void _getProp(const CCDBSynchronised &db, ICDBStructNode *node, NLMISC::C
 
 		TBEAST &getBEAST(uint32 index)
 		{
-			nlassert(index < 4);
+			nlassert(index < 7);
 			return _BEAST[index];
 		}
 		
