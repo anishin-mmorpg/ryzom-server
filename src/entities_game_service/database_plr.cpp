@@ -1198,9 +1198,9 @@ void CBankAccessor_PLR::TEXCHANGE::TGIVE::TArray::init(ICDBStructNode *parent, u
 	nlassert(node != NULL);
 	_USER_COLOR = node;
 	
-	node  = parent->getNode( ICDBStructNode::CTextId("CHARAC_BUFFS"), false );
-	nlassert(node != NULL);
-	_CHARAC_BUFFS = node;
+	// node  = parent->getNode( ICDBStructNode::CTextId("CHARAC_BUFFS"), false );
+	// nlassert(node != NULL);
+	// _CHARAC_BUFFS = node;
 	
 	node  = parent->getNode( ICDBStructNode::CTextId("WEIGHT"), false );
 	nlassert(node != NULL);
@@ -1285,9 +1285,9 @@ void CBankAccessor_PLR::TEXCHANGE::TRECEIVE::TArray::init(ICDBStructNode *parent
 	nlassert(node != NULL);
 	_USER_COLOR = node;
 	
-	node  = parent->getNode( ICDBStructNode::CTextId("CHARAC_BUFFS"), false );
-	nlassert(node != NULL);
-	_CHARAC_BUFFS = node;
+	// node  = parent->getNode( ICDBStructNode::CTextId("CHARAC_BUFFS"), false );
+	// nlassert(node != NULL);
+	// _CHARAC_BUFFS = node;
 	
 	node  = parent->getNode( ICDBStructNode::CTextId("WEIGHT"), false );
 	nlassert(node != NULL);
@@ -1500,9 +1500,9 @@ void CBankAccessor_PLR::TINVENTORY::TTEMP::TArray::init(ICDBStructNode *parent, 
 	nlassert(node != NULL);
 	_USER_COLOR = node;
 	
-	node  = parent->getNode( ICDBStructNode::CTextId("CHARAC_BUFFS"), false );
-	nlassert(node != NULL);
-	_CHARAC_BUFFS = node;
+	// node  = parent->getNode( ICDBStructNode::CTextId("CHARAC_BUFFS"), false );
+	// nlassert(node != NULL);
+	// _CHARAC_BUFFS = node;
 	
 	node  = parent->getNode( ICDBStructNode::CTextId("WEIGHT"), false );
 	nlassert(node != NULL);
@@ -1598,9 +1598,9 @@ void CBankAccessor_PLR::TINVENTORY::TSHARE::TArray::init(ICDBStructNode *parent,
 	nlassert(node != NULL);
 	_USER_COLOR = node;
 	
-	node  = parent->getNode( ICDBStructNode::CTextId("CHARAC_BUFFS"), false );
-	nlassert(node != NULL);
-	_CHARAC_BUFFS = node;
+	// node  = parent->getNode( ICDBStructNode::CTextId("CHARAC_BUFFS"), false );
+	// nlassert(node != NULL);
+	// _CHARAC_BUFFS = node;
 	
 	node  = parent->getNode( ICDBStructNode::CTextId("WEIGHT"), false );
 	nlassert(node != NULL);
@@ -2154,9 +2154,9 @@ void CBankAccessor_PLR::TTRADING::TArray::init(ICDBStructNode *parent, uint inde
 	nlassert(node != NULL);
 	_USER_COLOR = node;
 	
-	node  = parent->getNode( ICDBStructNode::CTextId("CHARAC_BUFFS"), false );
-	nlassert(node != NULL);
-	_CHARAC_BUFFS = node;
+	// node  = parent->getNode( ICDBStructNode::CTextId("CHARAC_BUFFS"), false );
+	// nlassert(node != NULL);
+	// _CHARAC_BUFFS = node;
 	
 	node  = parent->getNode( ICDBStructNode::CTextId("WEIGHT"), false );
 	nlassert(node != NULL);
