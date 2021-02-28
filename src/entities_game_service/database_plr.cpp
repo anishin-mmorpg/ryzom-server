@@ -1528,9 +1528,9 @@ void CBankAccessor_PLR::TINVENTORY::TTEMP::TArray::init(ICDBStructNode *parent, 
 	nlassert(node != NULL);
 	_PREREQUISIT_VALID = node;
 	
-	node  = parent->getNode( ICDBStructNode::CTextId("WORNED"), false );
-	nlassert(node != NULL);
-	_WORNED = node;
+	// node  = parent->getNode( ICDBStructNode::CTextId("WORNED"), false );
+	// nlassert(node != NULL);
+	// _WORNED = node;
 	
 	node  = parent->getNode( ICDBStructNode::CTextId("INFO_VERSION"), false );
 	nlassert(node != NULL);
