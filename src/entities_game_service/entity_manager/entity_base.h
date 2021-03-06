@@ -140,7 +140,7 @@ public:
 			_ExceptionString = std::string("<CEntityBase> : Invalid stat name ") + var;
 			return _ExceptionString.c_str();
 		}
-		virtual ~EInvalidStat() NL_OVERRIDE {}
+		virtual ~EInvalidStat() throw() {}
 	private:
 		mutable std::string _ExceptionString;
 	};

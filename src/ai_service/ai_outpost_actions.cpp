@@ -648,7 +648,7 @@ DEFINE_ACTION_TEMPLATE1(ContextOutpostGroupDesc,GT_GPRM,FamilyT)
 		string param;
 		args[i].get(param);
 		
-		param = NLMISC::toLowerAscii(param);
+		param = NLMISC::toLower(param);
 		
 		if	(	param == "contact camp"
 			||	param == "contact outpost"

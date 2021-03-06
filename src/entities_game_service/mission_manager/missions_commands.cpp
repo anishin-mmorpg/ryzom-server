@@ -560,6 +560,11 @@ NLMISC_COMMAND(addMission,"Add mission to character","<character_id> <Mission gi
 	return true;
 }
 
+
+
+/// Commands used by ARK
+
+
 CInventoryPtr getInventory(CCharacter *c, const string &inv)
 {
 	CInventoryPtr inventoryPtr = NULL;
@@ -936,9 +941,7 @@ NLMISC_COMMAND(getFames, "get fames of player", "<uid> faction1,faction2,faction
 	std::pair<PVP_CLAN::TPVPClan, PVP_CLAN::TPVPClan> allegiance = c->getAllegiance();
 	log.displayNL("%s", PVP_CLAN::toString(allegiance.first).c_str());
 	log.displayNL("%s", PVP_CLAN::toString(allegiance.second).c_str());
-#ifdef RYZOM_FORGE
 	log.displayNL("%d", c->getOrganization());
-#endif
 
 	std::vector<string> fames;
 	NLMISC::splitString(args[1], ",", fames);
@@ -1015,7 +1018,7 @@ NLMISC_COMMAND(getMoney, "get money of player", "<uid>")
 	return true;
 }
 
-#ifdef RYZOM_FORGE
+
 //----------------------------------------------------------------------------
 NLMISC_COMMAND(getPvpPoints, "get pvp points of player", "<uid>")
 {
@@ -1027,9 +1030,7 @@ NLMISC_COMMAND(getPvpPoints, "get pvp points of player", "<uid>")
 
 	return true;
 }
-#endif
 
-#ifdef RYZOM_FORGE
 //----------------------------------------------------------------------------
 NLMISC_COMMAND(getCivCultOrg, "get civ cult and organization of player", "<uid>")
 {
@@ -1042,9 +1043,8 @@ NLMISC_COMMAND(getCivCultOrg, "get civ cult and organization of player", "<uid>"
 
 	return true;
 }
-#endif
 
-#ifdef RYZOM_FORGE
+
 //----------------------------------------------------------------------------
 NLMISC_COMMAND(accessPowo, "give access to the powo", "<uid> player_name number")
 {
@@ -1127,7 +1127,6 @@ NLMISC_COMMAND(slide, "slide to the powo", "<uid> x y cell [z] [h]")
 
 	return true;
 }
-#endif
 
 //----------------------------------------------------------------------------
 NLMISC_COMMAND(spawn, "spawn entity", "<uid> quantity sheet dispersion orientation groupname x y look cell")

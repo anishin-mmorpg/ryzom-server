@@ -991,7 +991,7 @@ void CScriptVM::interpretCode(
 					{
 						float val = (float&)stack.top();
 						stack.pop();
-						compValue = *((uint32*)&val);
+						compValue = *((size_t*)&val);
 					}
 					break;
 				default:

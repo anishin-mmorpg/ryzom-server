@@ -1,4 +1,3 @@
-
 // Ryzom - MMORPG Framework <http://dev.ryzom.com/projects/ryzom/>
 // Copyright (C) 2010  Winch Gate Property Limited
 //
@@ -100,7 +99,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CKnownUserPtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -108,7 +107,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_RelationId != NOPE::INVALID_OBJECT_ID
+		if (_RelationId != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -160,9 +159,7 @@ namespace RSMGR
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_TargetCharacter), connection)+"'";
 		qs += ", ";
-		qs += _Relation.isValid()
-			? "'"+_Relation.toString()+"'"
-			: "DEFAULT(relation_type)";
+		qs += "'"+_Relation.toString()+"'";
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_Comments), connection)+"'";
 
@@ -227,9 +224,7 @@ namespace RSMGR
 		qs += ", ";
 		qs += "targer_character = '"+MSW::escapeString(NLMISC::toString(_TargetCharacter), connection)+"'";
 		qs += ", ";
-		qs += "relation_type = " + (_Relation.isValid()
-			? "'"+_Relation.toString()+"'"
-			: "DEFAULT(relation_type)");
+		qs += "relation_type = '"+_Relation.toString()+"'";
 		qs += ", ";
 		qs += "comments = '"+MSW::escapeString(NLMISC::toString(_Comments), connection)+"'";
 
@@ -483,7 +478,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -583,7 +578,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -643,7 +638,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -761,7 +756,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CSessionParticipantPtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -769,7 +764,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_Id != NOPE::INVALID_OBJECT_ID
+		if (_Id != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -819,9 +814,7 @@ namespace RSMGR
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_CharId), connection)+"'";
 		qs += ", ";
-		qs += _Status.isValid()
-			? "'"+_Status.toString()+"'"
-			: "DEFAULT(status)";
+		qs += "'"+_Status.toString()+"'";
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_Kicked), connection)+"'";
 
@@ -884,9 +877,7 @@ namespace RSMGR
 		qs += ", ";
 		qs += "char_id = '"+MSW::escapeString(NLMISC::toString(_CharId), connection)+"'";
 		qs += ", ";
-		qs += "status = " + (_Status.isValid()
-			? "'"+_Status.toString()+"'"
-			: "DEFAULT(status)");
+		qs += "status = '"+_Status.toString()+"'";
 		qs += ", ";
 		qs += "kicked = '"+MSW::escapeString(NLMISC::toString(_Kicked), connection)+"'";
 
@@ -1140,7 +1131,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -1239,7 +1230,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -1297,7 +1288,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -1421,7 +1412,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CCharacterPtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -1429,7 +1420,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_CharId != NOPE::INVALID_OBJECT_ID
+		if (_CharId != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -1490,17 +1481,11 @@ namespace RSMGR
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_RingAccess), connection)+"'";
 		qs += ", ";
-		qs += _Race.isValid()
-			? "'"+_Race.toString()+"'"
-			: "DEFAULT(race)";
+		qs += "'"+_Race.toString()+"'";
 		qs += ", ";
-		qs += _Civilisation.isValid()
-			? "'"+_Civilisation.toString()+"'"
-			: "DEFAULT(civilisation)";
+		qs += "'"+_Civilisation.toString()+"'";
 		qs += ", ";
-		qs += _Cult.isValid()
-			? "'"+_Cult.toString()+"'"
-			: "DEFAULT(cult)";
+		qs += "'"+_Cult.toString()+"'";
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_CurrentSession), connection)+"'";
 		qs += ", ";
@@ -1582,17 +1567,11 @@ namespace RSMGR
 		qs += ", ";
 		qs += "ring_access = '"+MSW::escapeString(NLMISC::toString(_RingAccess), connection)+"'";
 		qs += ", ";
-		qs += "race = " + (_Race.isValid()
-			? "'"+_Race.toString()+"'"
-			: "DEFAULT(race)");
+		qs += "race = '"+_Race.toString()+"'";
 		qs += ", ";
-		qs += "civilisation = " + (_Civilisation.isValid()
-			? "'"+_Civilisation.toString()+"'"
-			: "DEFAULT(civilisation)");
+		qs += "civilisation = '"+_Civilisation.toString()+"'";
 		qs += ", ";
-		qs += "cult = " + (_Cult.isValid()
-			? "'"+_Cult.toString()+"'"
-			: "DEFAULT(cult)");
+		qs += "cult = '"+_Cult.toString()+"'";
 		qs += ", ";
 		qs += "current_session = '"+MSW::escapeString(NLMISC::toString(_CurrentSession), connection)+"'";
 		qs += ", ";
@@ -1894,7 +1873,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -2013,7 +1992,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -2103,7 +2082,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -2188,7 +2167,7 @@ namespace RSMGR
 
 		// allocate the container
 		_Sessions = new std::vector < CSessionPtr >;
-
+		
 		// load the childs
 		ret &= CSession::loadChildrenOfCCharacter(connection, getObjectId(), *_Sessions, filename, lineNum);
 		return ret;
@@ -2207,7 +2186,7 @@ namespace RSMGR
 		nlassert(index < _Sessions->size());
 		return const_cast< CSessionPtr & >(_Sessions->operator[](index));
 	}
-
+	
 	CSessionPtr &CCharacter::getSessionsById(uint32 id) const
 	{
 		nlassert(_Sessions != NULL);
@@ -2239,7 +2218,7 @@ namespace RSMGR
 
 		// allocate the container
 		_SessionParticipants = new std::vector < CSessionParticipantPtr >;
-
+		
 		// load the childs
 		ret &= CSessionParticipant::loadChildrenOfCCharacter(connection, getObjectId(), *_SessionParticipants, filename, lineNum);
 		return ret;
@@ -2258,7 +2237,7 @@ namespace RSMGR
 		nlassert(index < _SessionParticipants->size());
 		return const_cast< CSessionParticipantPtr & >(_SessionParticipants->operator[](index));
 	}
-
+	
 	CSessionParticipantPtr &CCharacter::getSessionParticipantsById(uint32 id) const
 	{
 		nlassert(_SessionParticipants != NULL);
@@ -2290,7 +2269,7 @@ namespace RSMGR
 
 		// allocate the container
 		_KnownBy = new std::vector < CKnownUserPtr >;
-
+		
 		// load the childs
 		ret &= CKnownUser::loadChildrenOfCCharacter(connection, getObjectId(), *_KnownBy, filename, lineNum);
 		return ret;
@@ -2309,7 +2288,7 @@ namespace RSMGR
 		nlassert(index < _KnownBy->size());
 		return const_cast< CKnownUserPtr & >(_KnownBy->operator[](index));
 	}
-
+	
 	CKnownUserPtr &CCharacter::getKnownByById(uint32 id) const
 	{
 		nlassert(_KnownBy != NULL);
@@ -2341,7 +2320,7 @@ namespace RSMGR
 
 		// allocate the container
 		_PlayerRatings = new std::vector < CPlayerRatingPtr >;
-
+		
 		// load the childs
 		ret &= CPlayerRating::loadChildrenOfCCharacter(connection, getObjectId(), *_PlayerRatings, filename, lineNum);
 		return ret;
@@ -2360,7 +2339,7 @@ namespace RSMGR
 		nlassert(index < _PlayerRatings->size());
 		return const_cast< CPlayerRatingPtr & >(_PlayerRatings->operator[](index));
 	}
-
+	
 	CPlayerRatingPtr &CCharacter::getPlayerRatingsById(uint32 id) const
 	{
 		nlassert(_PlayerRatings != NULL);
@@ -2463,7 +2442,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CRingUserPtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -2471,7 +2450,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_UserId != NOPE::INVALID_OBJECT_ID
+		if (_UserId != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -2526,29 +2505,19 @@ namespace RSMGR
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_CurrentSession), connection)+"'";
 		qs += ", ";
-		qs += _CurrentActivity.isValid()
-			? "'"+_CurrentActivity.toString()+"'"
-			: "DEFAULT(current_activity)";
+		qs += "'"+_CurrentActivity.toString()+"'";
 		qs += ", ";
-		qs += _CurrentStatus.isValid()
-			? "'"+_CurrentStatus.toString()+"'"
-			: "DEFAULT(current_status)";
+		qs += "'"+_CurrentStatus.toString()+"'";
 		qs += ", ";
-		qs += _PublicLevel.isValid()
-			? "'"+_PublicLevel.toString()+"'"
-			: "DEFAULT(public_level)";
+		qs += "'"+_PublicLevel.toString()+"'";
 		qs += ", ";
-		qs += _AccountType.isValid()
-			? "'"+_AccountType.toString()+"'"
-			: "DEFAULT(account_type)";
+		qs += "'"+_AccountType.toString()+"'";
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_ContentAccessLevel), connection)+"'";
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_Description), connection)+"'";
 		qs += ", ";
-		qs += _Lang.isValid()
-			? "'"+_Lang.toString()+"'"
-			: "DEFAULT(lang)";
+		qs += "'"+_Lang.toString()+"'";
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_Cookie), connection)+"'";
 		qs += ", ";
@@ -2591,29 +2560,19 @@ namespace RSMGR
 		qs += ", ";
 		qs += "current_session = '"+MSW::escapeString(NLMISC::toString(_CurrentSession), connection)+"'";
 		qs += ", ";
-		qs += "current_activity = " + (_CurrentActivity.isValid()
-			? "'"+_CurrentActivity.toString()+"'"
-			: "DEFAULT(current_activity)");
+		qs += "current_activity = '"+_CurrentActivity.toString()+"'";
 		qs += ", ";
-		qs += "current_status = " + (_CurrentStatus.isValid()
-			? "'"+_CurrentStatus.toString()+"'"
-			: "DEFAULT(current_status)");
+		qs += "current_status = '"+_CurrentStatus.toString()+"'";
 		qs += ", ";
-		qs += "public_level = " + (_PublicLevel.isValid()
-			? "'"+_PublicLevel.toString()+"'"
-			: "DEFAULT(public_level)");
+		qs += "public_level = '"+_PublicLevel.toString()+"'";
 		qs += ", ";
-		qs += "account_type = " + (_AccountType.isValid()
-			? "'"+_AccountType.toString()+"'"
-			: "DEFAULT(account_type)");
+		qs += "account_type = '"+_AccountType.toString()+"'";
 		qs += ", ";
 		qs += "content_access_level = '"+MSW::escapeString(NLMISC::toString(_ContentAccessLevel), connection)+"'";
 		qs += ", ";
 		qs += "description = '"+MSW::escapeString(NLMISC::toString(_Description), connection)+"'";
 		qs += ", ";
-		qs += "lang = " + (_Lang.isValid()
-			? "'"+_Lang.toString()+"'"
-			: "DEFAULT(lang)");
+		qs += "lang = '"+_Lang.toString()+"'";
 		qs += ", ";
 		qs += "cookie = '"+MSW::escapeString(NLMISC::toString(_Cookie), connection)+"'";
 		qs += ", ";
@@ -2679,7 +2638,7 @@ namespace RSMGR
 				{
 					// cascading deletion for single child GMStatus
 					nlassert(loadGMStatus(connection, __FILE__, __LINE__));
-
+					
 					if (getGMStatus() != NULL)
 						getGMStatus()->remove(connection);
 				}
@@ -2904,7 +2863,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -3023,7 +2982,7 @@ namespace RSMGR
 
 		// allocate the container
 		_KnownUsers = new std::vector < CKnownUserPtr >;
-
+		
 		// load the childs
 		ret &= CKnownUser::loadChildrenOfCRingUser(connection, getObjectId(), *_KnownUsers, filename, lineNum);
 		return ret;
@@ -3042,7 +3001,7 @@ namespace RSMGR
 		nlassert(index < _KnownUsers->size());
 		return const_cast< CKnownUserPtr & >(_KnownUsers->operator[](index));
 	}
-
+	
 	CKnownUserPtr &CRingUser::getKnownUsersById(uint32 id) const
 	{
 		nlassert(_KnownUsers != NULL);
@@ -3074,7 +3033,7 @@ namespace RSMGR
 
 		// allocate the container
 		_Characters = new std::map < uint32,  CCharacterPtr >;
-
+		
 		// load the childs
 		ret &= CCharacter::loadChildrenOfCRingUser(connection, getObjectId(), *_Characters, filename, lineNum);
 		return ret;
@@ -3114,7 +3073,7 @@ namespace RSMGR
 
 		// allocate the container
 		_Folders = new std::vector < CFolderPtr >;
-
+		
 		// load the childs
 		ret &= CFolder::loadChildrenOfCRingUser(connection, getObjectId(), *_Folders, filename, lineNum);
 		return ret;
@@ -3133,7 +3092,7 @@ namespace RSMGR
 		nlassert(index < _Folders->size());
 		return const_cast< CFolderPtr & >(_Folders->operator[](index));
 	}
-
+	
 	CFolderPtr &CRingUser::getFoldersById(uint32 id) const
 	{
 		nlassert(_Folders != NULL);
@@ -3165,7 +3124,7 @@ namespace RSMGR
 
 		// allocate the container
 		_FolderAccess = new std::vector < CFolderAccessPtr >;
-
+		
 		// load the childs
 		ret &= CFolderAccess::loadChildrenOfCRingUser(connection, getObjectId(), *_FolderAccess, filename, lineNum);
 		return ret;
@@ -3184,7 +3143,7 @@ namespace RSMGR
 		nlassert(index < _FolderAccess->size());
 		return const_cast< CFolderAccessPtr & >(_FolderAccess->operator[](index));
 	}
-
+	
 	CFolderAccessPtr &CRingUser::getFolderAccessById(uint32 id) const
 	{
 		nlassert(_FolderAccess != NULL);
@@ -3305,7 +3264,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CSessionPtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -3313,7 +3272,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_SessionId != NOPE::INVALID_OBJECT_ID
+		if (_SessionId != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -3359,9 +3318,7 @@ namespace RSMGR
 		qs += "session_type, title, owner, plan_date, start_date, description, orientation, level, rule_type, access_type, state, host_shard_id, subscription_slots, reserved_slots, estimated_duration, final_duration, folder_id, lang, icone, anim_mode, race_filter, religion_filter, guild_filter, shard_filter, level_filter, subscription_closed, newcomer";
 		qs += ") VALUES (";
 		
-		qs += _SessionType.isValid()
-			? "'"+_SessionType.toString()+"'"
-			: "DEFAULT(session_type)";
+		qs += "'"+_SessionType.toString()+"'";
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_Title), connection)+"'";
 		qs += ", ";
@@ -3373,25 +3330,15 @@ namespace RSMGR
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_Description), connection)+"'";
 		qs += ", ";
-		qs += _Orientation.isValid()
-			? "'"+_Orientation.toString()+"'"
-			: "DEFAULT(orientation)";
+		qs += "'"+_Orientation.toString()+"'";
 		qs += ", ";
-		qs += _Level.isValid()
-			? "'"+_Level.toString()+"'"
-			: "DEFAULT(level)";
+		qs += "'"+_Level.toString()+"'";
 		qs += ", ";
-		qs += _RuleType.isValid()
-			? "'"+_RuleType.toString()+"'"
-			: "DEFAULT(rule_type)";
+		qs += "'"+_RuleType.toString()+"'";
 		qs += ", ";
-		qs += _AccessType.isValid()
-			? "'"+_AccessType.toString()+"'"
-			: "DEFAULT(access_type)";
+		qs += "'"+_AccessType.toString()+"'";
 		qs += ", ";
-		qs += _State.isValid()
-			? "'"+_State.toString()+"'"
-			: "DEFAULT(state)";
+		qs += "'"+_State.toString()+"'";
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_HostShardId), connection)+"'";
 		qs += ", ";
@@ -3399,9 +3346,7 @@ namespace RSMGR
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_ReservedSlots), connection)+"'";
 		qs += ", ";
-		qs += _EstimatedDuration.isValid()
-			? "'"+_EstimatedDuration.toString()+"'"
-			: "DEFAULT(estimated_duration)";
+		qs += "'"+_EstimatedDuration.toString()+"'";
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_FinalDuration), connection)+"'";
 		qs += ", ";
@@ -3411,17 +3356,13 @@ namespace RSMGR
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_Icone), connection)+"'";
 		qs += ", ";
-		qs += _AnimMode.isValid()
-			? "'"+_AnimMode.toString()+"'"
-			: "DEFAULT(anim_mode)";
+		qs += "'"+_AnimMode.toString()+"'";
 		qs += ", ";
 		qs += "'"+_RaceFilter.toString()+"'";
 		qs += ", ";
 		qs += "'"+_ReligionFilter.toString()+"'";
 		qs += ", ";
-		qs += _GuildFilter.isValid()
-			? "'"+_GuildFilter.toString()+"'"
-			: "DEFAULT(guild_filter)";
+		qs += "'"+_GuildFilter.toString()+"'";
 		qs += ", ";
 		qs += "'"+_ShardFilter.toString()+"'";
 		qs += ", ";
@@ -3486,9 +3427,7 @@ namespace RSMGR
 		std::string qs;
 		qs = "UPDATE sessions SET ";
 		
-		qs += "session_type = " + (_SessionType.isValid()
-			? "'"+_SessionType.toString()+"'"
-			: "DEFAULT(session_type)");
+		qs += "session_type = '"+_SessionType.toString()+"'";
 		qs += ", ";
 		qs += "title = '"+MSW::escapeString(NLMISC::toString(_Title), connection)+"'";
 		qs += ", ";
@@ -3500,25 +3439,15 @@ namespace RSMGR
 		qs += ", ";
 		qs += "description = '"+MSW::escapeString(NLMISC::toString(_Description), connection)+"'";
 		qs += ", ";
-		qs += "orientation = " + (_Orientation.isValid()
-			? "'"+_Orientation.toString()+"'"
-			: "DEFAULT(orientation)");
+		qs += "orientation = '"+_Orientation.toString()+"'";
 		qs += ", ";
-		qs += "level = " + (_Level.isValid()
-			? "'"+_Level.toString()+"'"
-			: "DEFAULT(level)");
+		qs += "level = '"+_Level.toString()+"'";
 		qs += ", ";
-		qs += "rule_type = " + (_RuleType.isValid()
-			? "'"+_RuleType.toString()+"'"
-			: "DEFAULT(rule_type)");
+		qs += "rule_type = '"+_RuleType.toString()+"'";
 		qs += ", ";
-		qs += "access_type = " + (_AccessType.isValid()
-			? "'"+_AccessType.toString()+"'"
-			: "DEFAULT(access_type)");
+		qs += "access_type = '"+_AccessType.toString()+"'";
 		qs += ", ";
-		qs += "state = " + (_State.isValid()
-			? "'"+_State.toString()+"'"
-			: "DEFAULT(state)");
+		qs += "state = '"+_State.toString()+"'";
 		qs += ", ";
 		qs += "host_shard_id = '"+MSW::escapeString(NLMISC::toString(_HostShardId), connection)+"'";
 		qs += ", ";
@@ -3526,9 +3455,7 @@ namespace RSMGR
 		qs += ", ";
 		qs += "reserved_slots = '"+MSW::escapeString(NLMISC::toString(_ReservedSlots), connection)+"'";
 		qs += ", ";
-		qs += "estimated_duration = " + (_EstimatedDuration.isValid()
-			? "'"+_EstimatedDuration.toString()+"'"
-			: "DEFAULT(estimated_duration)");
+		qs += "estimated_duration = '"+_EstimatedDuration.toString()+"'";
 		qs += ", ";
 		qs += "final_duration = '"+MSW::escapeString(NLMISC::toString(_FinalDuration), connection)+"'";
 		qs += ", ";
@@ -3538,17 +3465,13 @@ namespace RSMGR
 		qs += ", ";
 		qs += "icone = '"+MSW::escapeString(NLMISC::toString(_Icone), connection)+"'";
 		qs += ", ";
-		qs += "anim_mode = " + (_AnimMode.isValid()
-			? "'"+_AnimMode.toString()+"'"
-			: "DEFAULT(anim_mode)");
+		qs += "anim_mode = '"+_AnimMode.toString()+"'";
 		qs += ", ";
 		qs += "race_filter = '"+_RaceFilter.toString()+"'";
 		qs += ", ";
 		qs += "religion_filter = '"+_ReligionFilter.toString()+"'";
 		qs += ", ";
-		qs += "guild_filter = " + (_GuildFilter.isValid()
-			? "'"+_GuildFilter.toString()+"'"
-			: "DEFAULT(guild_filter)");
+		qs += "guild_filter = '"+_GuildFilter.toString()+"'";
 		qs += ", ";
 		qs += "shard_filter = '"+_ShardFilter.toString()+"'";
 		qs += ", ";
@@ -3847,7 +3770,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -4017,7 +3940,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -4169,7 +4092,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -4316,7 +4239,7 @@ namespace RSMGR
 
 		// allocate the container
 		_SessionParticipants = new std::vector < CSessionParticipantPtr >;
-
+		
 		// load the childs
 		ret &= CSessionParticipant::loadChildrenOfCSession(connection, getObjectId(), *_SessionParticipants, filename, lineNum);
 		return ret;
@@ -4335,7 +4258,7 @@ namespace RSMGR
 		nlassert(index < _SessionParticipants->size());
 		return const_cast< CSessionParticipantPtr & >(_SessionParticipants->operator[](index));
 	}
-
+	
 	CSessionParticipantPtr &CSession::getSessionParticipantsById(uint32 id) const
 	{
 		nlassert(_SessionParticipants != NULL);
@@ -4367,7 +4290,7 @@ namespace RSMGR
 
 		// allocate the container
 		_GuildInvites = new std::vector < CGuildInvitePtr >;
-
+		
 		// load the childs
 		ret &= CGuildInvite::loadChildrenOfCSession(connection, getObjectId(), *_GuildInvites, filename, lineNum);
 		return ret;
@@ -4386,7 +4309,7 @@ namespace RSMGR
 		nlassert(index < _GuildInvites->size());
 		return const_cast< CGuildInvitePtr & >(_GuildInvites->operator[](index));
 	}
-
+	
 	CGuildInvitePtr &CSession::getGuildInvitesById(uint32 id) const
 	{
 		nlassert(_GuildInvites != NULL);
@@ -4418,7 +4341,7 @@ namespace RSMGR
 
 		// allocate the container
 		_JournalEntries = new std::vector < CJournalEntryPtr >;
-
+		
 		// load the childs
 		ret &= CJournalEntry::loadChildrenOfCSession(connection, getObjectId(), *_JournalEntries, filename, lineNum);
 		return ret;
@@ -4437,7 +4360,7 @@ namespace RSMGR
 		nlassert(index < _JournalEntries->size());
 		return const_cast< CJournalEntryPtr & >(_JournalEntries->operator[](index));
 	}
-
+	
 	CJournalEntryPtr &CSession::getJournalEntriesById(uint32 id) const
 	{
 		nlassert(_JournalEntries != NULL);
@@ -4534,7 +4457,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CShardPtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -4542,7 +4465,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_ShardId != NOPE::INVALID_OBJECT_ID
+		if (_ShardId != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -4593,9 +4516,7 @@ namespace RSMGR
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_WSOnline), connection)+"'";
 		qs += ", ";
-		qs += _RequiredState.isValid()
-			? "'"+_RequiredState.toString()+"'"
-			: "DEFAULT(RequiredState)";
+		qs += "'"+_RequiredState.toString()+"'";
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_MOTD), connection)+"'";
 
@@ -4630,9 +4551,7 @@ namespace RSMGR
 		qs += ", ";
 		qs += "WSOnline = '"+MSW::escapeString(NLMISC::toString(_WSOnline), connection)+"'";
 		qs += ", ";
-		qs += "RequiredState = " + (_RequiredState.isValid()
-			? "'"+_RequiredState.toString()+"'"
-			: "DEFAULT(RequiredState)");
+		qs += "RequiredState = '"+_RequiredState.toString()+"'";
 		qs += ", ";
 		qs += "MOTD = '"+MSW::escapeString(NLMISC::toString(_MOTD), connection)+"'";
 
@@ -4858,7 +4777,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -4951,7 +4870,7 @@ namespace RSMGR
 
 		// allocate the container
 		_Guilds = new std::map < uint32,  CGuildPtr >;
-
+		
 		// load the childs
 		ret &= CGuild::loadChildrenOfCShard(connection, getObjectId(), *_Guilds, filename, lineNum);
 		return ret;
@@ -5058,7 +4977,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CGuildPtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -5066,7 +4985,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_GuildId != NOPE::INVALID_OBJECT_ID
+		if (_GuildId != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -5423,7 +5342,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -5516,7 +5435,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -5561,7 +5480,7 @@ namespace RSMGR
 
 		// allocate the container
 		_Characters = new std::vector < CCharacterPtr >;
-
+		
 		// load the childs
 		ret &= CCharacter::loadChildrenOfCGuild(connection, getObjectId(), *_Characters, filename, lineNum);
 		return ret;
@@ -5580,7 +5499,7 @@ namespace RSMGR
 		nlassert(index < _Characters->size());
 		return const_cast< CCharacterPtr & >(_Characters->operator[](index));
 	}
-
+	
 	CCharacterPtr &CGuild::getCharactersById(uint32 id) const
 	{
 		nlassert(_Characters != NULL);
@@ -5612,7 +5531,7 @@ namespace RSMGR
 
 		// allocate the container
 		_Invites = new std::vector < CGuildInvitePtr >;
-
+		
 		// load the childs
 		ret &= CGuildInvite::loadChildrenOfCGuild(connection, getObjectId(), *_Invites, filename, lineNum);
 		return ret;
@@ -5631,7 +5550,7 @@ namespace RSMGR
 		nlassert(index < _Invites->size());
 		return const_cast< CGuildInvitePtr & >(_Invites->operator[](index));
 	}
-
+	
 	CGuildInvitePtr &CGuild::getInvitesById(uint32 id) const
 	{
 		nlassert(_Invites != NULL);
@@ -5726,7 +5645,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CGuildInvitePtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -5734,7 +5653,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_Id != NOPE::INVALID_OBJECT_ID
+		if (_Id != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -6093,7 +6012,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -6186,7 +6105,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -6236,7 +6155,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -6344,7 +6263,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CPlayerRatingPtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -6352,7 +6271,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_Id != NOPE::INVALID_OBJECT_ID
+		if (_Id != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -6731,7 +6650,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -6829,7 +6748,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -6889,7 +6808,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -7007,7 +6926,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CJournalEntryPtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -7015,7 +6934,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_Id != NOPE::INVALID_OBJECT_ID
+		if (_Id != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -7065,9 +6984,7 @@ namespace RSMGR
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_Author), connection)+"'";
 		qs += ", ";
-		qs += _Type.isValid()
-			? "'"+_Type.toString()+"'"
-			: "DEFAULT(type)";
+		qs += "'"+_Type.toString()+"'";
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_Text), connection)+"'";
 		qs += ", ";
@@ -7119,9 +7036,7 @@ namespace RSMGR
 		qs += ", ";
 		qs += "author = '"+MSW::escapeString(NLMISC::toString(_Author), connection)+"'";
 		qs += ", ";
-		qs += "type = " + (_Type.isValid()
-			? "'"+_Type.toString()+"'"
-			: "DEFAULT(type)");
+		qs += "type = '"+_Type.toString()+"'";
 		qs += ", ";
 		qs += "text = '"+MSW::escapeString(NLMISC::toString(_Text), connection)+"'";
 		qs += ", ";
@@ -7363,7 +7278,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -7463,7 +7378,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -7585,7 +7500,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CFolderPtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -7593,7 +7508,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_Id != NOPE::INVALID_OBJECT_ID
+		if (_Id != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -7956,7 +7871,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -8050,7 +7965,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -8097,7 +8012,7 @@ namespace RSMGR
 
 		// allocate the container
 		_FolderAccess = new std::vector < CFolderAccessPtr >;
-
+		
 		// load the childs
 		ret &= CFolderAccess::loadChildrenOfCFolder(connection, getObjectId(), *_FolderAccess, filename, lineNum);
 		return ret;
@@ -8116,7 +8031,7 @@ namespace RSMGR
 		nlassert(index < _FolderAccess->size());
 		return const_cast< CFolderAccessPtr & >(_FolderAccess->operator[](index));
 	}
-
+	
 	CFolderAccessPtr &CFolder::getFolderAccessById(uint32 id) const
 	{
 		nlassert(_FolderAccess != NULL);
@@ -8148,7 +8063,7 @@ namespace RSMGR
 
 		// allocate the container
 		_Sessions = new std::vector < CSessionPtr >;
-
+		
 		// load the childs
 		ret &= CSession::loadChildrenOfCFolder(connection, getObjectId(), *_Sessions, filename, lineNum);
 		return ret;
@@ -8167,7 +8082,7 @@ namespace RSMGR
 		nlassert(index < _Sessions->size());
 		return const_cast< CSessionPtr & >(_Sessions->operator[](index));
 	}
-
+	
 	CSessionPtr &CFolder::getSessionsById(uint32 id) const
 	{
 		nlassert(_Sessions != NULL);
@@ -8262,7 +8177,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CFolderAccessPtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -8270,7 +8185,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_Id != NOPE::INVALID_OBJECT_ID
+		if (_Id != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -8629,7 +8544,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -8722,7 +8637,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -8772,7 +8687,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -8884,7 +8799,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CScenarioPtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -8892,7 +8807,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_Id != NOPE::INVALID_OBJECT_ID
+		if (_Id != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -8948,19 +8863,13 @@ namespace RSMGR
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_RRPTotal), connection)+"'";
 		qs += ", ";
-		qs += _AnimMode.isValid()
-			? "'"+_AnimMode.toString()+"'"
-			: "DEFAULT(anim_mode)";
+		qs += "'"+_AnimMode.toString()+"'";
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_Language), connection)+"'";
 		qs += ", ";
-		qs += _Orientation.isValid()
-			? "'"+_Orientation.toString()+"'"
-			: "DEFAULT(orientation)";
+		qs += "'"+_Orientation.toString()+"'";
 		qs += ", ";
-		qs += _Level.isValid()
-			? "'"+_Level.toString()+"'"
-			: "DEFAULT(level)";
+		qs += "'"+_Level.toString()+"'";
 		qs += ", ";
 		qs += "'"+MSW::escapeString(NLMISC::toString(_AllowFreeTrial), connection)+"'";
 
@@ -9003,19 +8912,13 @@ namespace RSMGR
 		qs += ", ";
 		qs += "rrp_total = '"+MSW::escapeString(NLMISC::toString(_RRPTotal), connection)+"'";
 		qs += ", ";
-		qs += "anim_mode = " + (_AnimMode.isValid()
-			? "'"+_AnimMode.toString()+"'"
-			: "DEFAULT(anim_mode)");
+		qs += "anim_mode = '"+_AnimMode.toString()+"'";
 		qs += ", ";
 		qs += "language = '"+MSW::escapeString(NLMISC::toString(_Language), connection)+"'";
 		qs += ", ";
-		qs += "orientation = " + (_Orientation.isValid()
-			? "'"+_Orientation.toString()+"'"
-			: "DEFAULT(orientation)");
+		qs += "orientation = '"+_Orientation.toString()+"'";
 		qs += ", ";
-		qs += "level = " + (_Level.isValid()
-			? "'"+_Level.toString()+"'"
-			: "DEFAULT(level)");
+		qs += "level = '"+_Level.toString()+"'";
 		qs += ", ";
 		qs += "allow_free_trial = '"+MSW::escapeString(NLMISC::toString(_AllowFreeTrial), connection)+"'";
 
@@ -9267,7 +9170,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -9375,7 +9278,7 @@ namespace RSMGR
 
 		// allocate the container
 		_SessionLogs = new std::vector < CSessionLogPtr >;
-
+		
 		// load the childs
 		ret &= CSessionLog::loadChildrenOfCScenario(connection, getObjectId(), *_SessionLogs, filename, lineNum);
 		return ret;
@@ -9394,7 +9297,7 @@ namespace RSMGR
 		nlassert(index < _SessionLogs->size());
 		return const_cast< CSessionLogPtr & >(_SessionLogs->operator[](index));
 	}
-
+	
 	CSessionLogPtr &CScenario::getSessionLogsById(uint32 id) const
 	{
 		nlassert(_SessionLogs != NULL);
@@ -9426,7 +9329,7 @@ namespace RSMGR
 
 		// allocate the container
 		_PlayerRatings = new std::vector < CPlayerRatingPtr >;
-
+		
 		// load the childs
 		ret &= CPlayerRating::loadChildrenOfCScenario(connection, getObjectId(), *_PlayerRatings, filename, lineNum);
 		return ret;
@@ -9445,7 +9348,7 @@ namespace RSMGR
 		nlassert(index < _PlayerRatings->size());
 		return const_cast< CPlayerRatingPtr & >(_PlayerRatings->operator[](index));
 	}
-
+	
 	CPlayerRatingPtr &CScenario::getPlayerRatingsById(uint32 id) const
 	{
 		nlassert(_PlayerRatings != NULL);
@@ -9540,7 +9443,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CSessionLogPtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -9548,7 +9451,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_Id != NOPE::INVALID_OBJECT_ID
+		if (_Id != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -9907,7 +9810,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -10006,7 +9909,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		for (uint i=0; i<result->getNumRows(); ++i)
 		{
@@ -10126,7 +10029,7 @@ namespace RSMGR
 		{
 			nlwarning("ERROR : someone try to delete this object, but there are still ptr on it !");
 			CGmStatusPtr *ptr = _PtrList;
-			do
+			do 
 			{
 				nlwarning("  Pointer created from '%s', line %u", ptr->_FileName, ptr->_LineNum);
 				ptr = _PtrList->getNextPtr();
@@ -10134,7 +10037,7 @@ namespace RSMGR
 			nlstop;
 		}
 		// remove object from cache map
-		if (_UserId != NOPE::INVALID_OBJECT_ID
+		if (_UserId != NOPE::INVALID_OBJECT_ID 
 			&& _ObjectState != NOPE::os_removed
 			&& _ObjectState != NOPE::os_transient)
 		{
@@ -10458,7 +10361,7 @@ namespace RSMGR
 		if(_ObjectState == NOPE::os_released && state == NOPE::os_removed)
 		{
 			// a release object gets removed (e.g. by remove by id)
-
+		
 			// delete the object
 			delete this;
 
@@ -10550,7 +10453,7 @@ namespace RSMGR
 			return false;
 		}
 
-		CUniquePtr<MSW::CStoreResult> result = connection.storeResult();
+		CUniquePtr<MSW::CStoreResult> result(connection.storeResult());
 
 		// check that the data description is consistent with database content
 		nlassert(result->getNumRows() <= 1);
@@ -10580,7 +10483,7 @@ namespace RSMGR
 			childPtr = ret;
 			return true;
 		}
-
+	
 		// no result, but no error
 		childPtr = CGmStatusPtr();
 		return true;

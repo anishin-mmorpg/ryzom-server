@@ -1,4 +1,3 @@
-
 // Ryzom - MMORPG Framework <http://dev.ryzom.com/projects/ryzom/>
 // Copyright (C) 2010  Winch Gate Property Limited
 //
@@ -18,7 +17,6 @@
 /////////////////////////////////////////////////////////////////
 // WARNING : this is a generated file, don't change it !
 /////////////////////////////////////////////////////////////////
-
 #include "stdpch.h"
 #include "database_outpost.h"
 

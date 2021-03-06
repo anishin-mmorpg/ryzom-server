@@ -880,7 +880,6 @@ void COutpost::createSquad(CGroupDesc<COutpostSquadFamily> const* groupDesc, COu
 	grp->_UpdateNbTicks = 10;
 	grp->respawnTime() = respawTimeGC;
 	
-	grp->getDebugHistory()->setRecording(true); // FIXME: https://github.com/kaetemi/ryzomclassic/issues/152
 	grp->updateStateInstance();	// Directly call his first state (to retrieve associated params).
 	
 	if (createOrder!=0)
@@ -1154,7 +1153,7 @@ NLMISC_COMMAND(displayOutposts, "list the available outpost", "")
 	if (args.size() > 0)
 		return false;
 	
-	static const uint32 instanceNumber = std::numeric_limits<uint32>::max();
+	uint32 instanceNumber = std::numeric_limits<uint32>::max();
 	for (uint i=0; i<CAIS::instance().AIList().size(); ++i)
 	{
 		CAIInstance	*const	aii = CAIS::instance().AIList()[i];

@@ -1232,7 +1232,6 @@ void CDamageScoreManager::playerDeath(CCharacter * victimChar, const CCharacter 
 
 			if (winnerGainFactionPoints)
 			{
-#ifdef RYZOM_FORGE
 				// Compute Fames delta
 				sint32 fameFactor = 0;
 				for (uint8 fameIdx = 0; fameIdx < 7; fameIdx++)
@@ -1254,11 +1253,6 @@ void CDamageScoreManager::playerDeath(CCharacter * victimChar, const CCharacter 
 				// player gains faction points
 				changePlayerPvpPoints(winnerChar, sint32(fpPerPlayer) * fameFactor);
 				winnerChar->sendFactionPointGainKillMessage(winnerFaction, fpPerPlayer * fameFactor, victimChar->getId());
-#elif defined(RYZOM_EPISODE2_REACTIVATE)
-				// player gains faction points
-				changePlayerFactionPoints(winnerChar, winnerFaction, sint32(fpPerPlayer));
-				winnerChar->sendFactionPointGainKillMessage(winnerFaction, fpPerPlayer, victimChar->getId());
-#endif
 			}
 
 			// player gains HoF points
@@ -1266,15 +1260,14 @@ void CDamageScoreManager::playerDeath(CCharacter * victimChar, const CCharacter 
 			// and a way for known if an episode occurs (and specs for known if other episode pemrti to win HoF point...)
 			//changePlayerHoFPoints(winnerChar, sint32(hofpPerPlayer));
 
-#ifdef RYZOM_EPISODE2_REACTIVATE
+			/*
 			// PvP faction winner HOF reward
 			CPVPManager2::getInstance()->characterKillerInPvPFaction( winnerChar, winnerFaction, (sint32)fpPerPlayer );
 			if( finalBlower == winnerChar )
 			{
 				CPVPManager2::getInstance()->finalBlowerKillerInPvPFaction( winnerChar, winnerFaction, victimChar );
 			}
-#endif
-
+			*/
 			rewardedKillers.push_back(winnerChar->getId());
 			nbRewardedMembers++;
 		}
@@ -1863,7 +1856,6 @@ sint32 CDamageScoreManager::changePlayerFactionPoints(CCharacter * playerChar, P
 	return fpDelta;
 }
 
-#ifdef RYZOM_FORGE
 //-----------------------------------------------------------------------------
 sint32 CDamageScoreManager::changePlayerPvpPoints(CCharacter * playerChar, sint32 fpDelta)
 {
@@ -1884,7 +1876,7 @@ sint32 CDamageScoreManager::changePlayerPvpPoints(CCharacter * playerChar, sint3
 
 	return fpDelta;
 }
-#endif
+
 
 //-----------------------------------------------------------------------------
 void CDamageScoreManager::changePlayerHoFPoints(CCharacter * playerChar, sint32 hofpDelta)

@@ -91,8 +91,8 @@ void				CDataSetMS::readdAllocatedTrackers( NLNET::CMessage& msgin, TServiceId s
 	TSelfPropTrackers::const_iterator ipt;
 	for ( ipt=selfPropTrackers.begin(); ipt!=selfPropTrackers.end(); ++ipt )
 	{
-		smidpool.reacquireId( (*ipt).smid() & 0xFFF );
-		mutidpool.reacquireId( (*ipt).mutid() & 0xFFF );
+		smidpool.reacquireId( (*ipt).smid() );
+		mutidpool.reacquireId( (*ipt).mutid() );
 
 		_SubscribersByProperty[(*ipt).propIndex()].push_back(
 			CChangeTrackerMS( serviceId, true,
@@ -107,15 +107,15 @@ void				CDataSetMS::readdAllocatedTrackers( NLNET::CMessage& msgin, TServiceId s
 	// Entity trackers
 	CChangeTrackerClient selfAddingTracker;
 	msgin.serial( selfAddingTracker );
-	smidpool.reacquireId( selfAddingTracker.smid() & 0xFFF );
-	mutidpool.reacquireId( selfAddingTracker.mutid() & 0xFFF );
+	smidpool.reacquireId( selfAddingTracker.smid() );
+	mutidpool.reacquireId( selfAddingTracker.mutid() );
 	_EntityTrackers[ADDING].push_back( CChangeTrackerMS( serviceId, true ) );
 	_EntityTrackers[ADDING].back().reaccess( selfAddingTracker.smid() );
 	_EntityTrackers[ADDING].back().createMutex( selfAddingTracker.mutid(), false );
 	CChangeTrackerClient selfRemovingTracker;
 	msgin.serial( selfRemovingTracker );
-	smidpool.reacquireId( selfRemovingTracker.smid() & 0xFFF );
-	mutidpool.reacquireId( selfRemovingTracker.mutid() & 0xFFF );
+	smidpool.reacquireId( selfRemovingTracker.smid() );
+	mutidpool.reacquireId( selfRemovingTracker.mutid() );
 	_EntityTrackers[REMOVING].push_back( CChangeTrackerMS( serviceId, true ) );
 	_EntityTrackers[REMOVING].back().reaccess( selfRemovingTracker.smid() );
 	_EntityTrackers[REMOVING].back().createMutex( selfRemovingTracker.mutid(), false );

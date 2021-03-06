@@ -21,7 +21,7 @@
 #include "nel/net/callback_server.h"
 #include "game_share/ryzom_entity_id.h"
 //#include "game_share/ring_session_manager_itf.h"
-//#include "../../../code/nelns/welcome_service/welcome_service_itf.h"
+//#include "../../nelns/welcome_service/welcome_service_itf.h"
 //#include "mysql_wrapper.h"
 //#include "database_mapping.h"
 

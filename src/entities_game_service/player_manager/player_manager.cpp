@@ -460,9 +460,7 @@ void CPlayerManager::addClientCallback()
 		{ "SET_PLAYER_SEASON",					cbSetPlayerSeason		}, // from DSS
 
 		{ "TELEPORT_PLAYER",					cbTeleportPlayer		}, // from AIS
-#ifdef RYZOM_FORGE
 		{ "TRIGGER_WEBIG",						cbTriggerWebig			}, // from AIS
-#endif
 		
 		{ "SET_CHAR_AIINSTANCE",			cbSetCharacterAIInstance},
 
@@ -2254,7 +2252,7 @@ bool CPlayerManager::hasBetterCSRGrade( CPlayer* p1, CPlayer *p2, bool devIsNorm
 	if ( p2->havePriv(":SGM:") )
 		return ( p1->havePriv(":SGM:") );
 	if ( p2->havePriv(":EM:") )
-		return ( p1->havePriv(":SGM:EM:") );
+		return ( p1->havePriv(":SGM:EM:GM:") );
 	if ( p2->havePriv(":GM:") )
 		return ( p1->havePriv(":SGM:EM:GM:") );
 	if ( p2->havePriv(":EG:") )
@@ -2489,7 +2487,8 @@ static void	mailNotification(const std::string& to, const std::string& from)
 		return;
 
 	// first, build a valid character (upper case first, then lower case);
-	ucstring ucCharname = ucstring::makeFromUtf8(capitalize(to));
+	ucstring	ucCharname = toLower(to);	// lower case
+	ucCharname[0] = toUpper(ucCharname[0]);	// first upper case
 
 	// second, get char id that matches the name
 	CEntityId	charId = NLMISC::CEntityIdTranslator::getInstance()->getByEntity(ucCharname);

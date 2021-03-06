@@ -1,4 +1,3 @@
-
 // Ryzom - MMORPG Framework <http://dev.ryzom.com/projects/ryzom/>
 // Copyright (C) 2010  Winch Gate Property Limited
 //
@@ -112,9 +111,9 @@ namespace RSMGR
 		CKnownUserPtr()
 			: _FileName(NULL),
 			_LineNum(0),
-			_Ptr(NULL),
 			_NextPtr(NULL),
-			_PrevPtr(NULL)
+			_PrevPtr(NULL),
+			_Ptr(NULL)
 		{
 		}
 
@@ -149,7 +148,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -289,7 +288,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -429,7 +428,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -569,7 +568,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -709,7 +708,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -849,7 +848,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -989,7 +988,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -1092,9 +1091,9 @@ namespace RSMGR
 		CGuildInvitePtr()
 			: _FileName(NULL),
 			_LineNum(0),
-			_Ptr(NULL),
 			_NextPtr(NULL),
-			_PrevPtr(NULL)
+			_PrevPtr(NULL),
+			_Ptr(NULL)
 		{
 		}
 
@@ -1129,7 +1128,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -1232,9 +1231,9 @@ namespace RSMGR
 		CPlayerRatingPtr()
 			: _FileName(NULL),
 			_LineNum(0),
-			_Ptr(NULL),
 			_NextPtr(NULL),
-			_PrevPtr(NULL)
+			_PrevPtr(NULL),
+			_Ptr(NULL)
 		{
 		}
 
@@ -1269,7 +1268,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -1372,9 +1371,9 @@ namespace RSMGR
 		CJournalEntryPtr()
 			: _FileName(NULL),
 			_LineNum(0),
-			_Ptr(NULL),
 			_NextPtr(NULL),
-			_PrevPtr(NULL)
+			_PrevPtr(NULL),
+			_Ptr(NULL)
 		{
 		}
 
@@ -1409,7 +1408,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -1549,7 +1548,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -1689,7 +1688,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -1829,7 +1828,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -1969,7 +1968,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -2109,7 +2108,7 @@ namespace RSMGR
 			_PrevPtr(NULL)
 		{
 			_Ptr = objectPtr;
-
+			
 			linkPtr();
 		}
 
@@ -2202,7 +2201,7 @@ namespace RSMGR
 			end_of_enum,
 
 			invalid_val,
-
+			
 			/// Number of enumerated values
 			nb_enum_items = 2
 		};
@@ -2231,11 +2230,10 @@ namespace RSMGR
 				NL_STRING_CONVERSION_TABLE_ENTRY(ut_character)
 				NL_STRING_CONVERSION_TABLE_ENTRY(ut_pioneer)
 				NL_STRING_CONVERSION_TABLE_ENTRY(invalid_val)
-			};
-			static NLMISC::CStringConversion<TValues>
-			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)
-			/ sizeof(TValues_nl_string_conversion_table[0]), 
-			invalid_val);
+			};                                                                                             
+			static NLMISC::CStringConversion<TValues>                                                                
+			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)   
+			/ sizeof(TValues_nl_string_conversion_table[0]),  invalid_val);
 
 			return conversionTable;
 		}
@@ -2337,7 +2335,7 @@ namespace RSMGR
 			end_of_enum,
 
 			invalid_val,
-
+			
 			/// Number of enumerated values
 			nb_enum_items = 3
 		};
@@ -2368,11 +2366,10 @@ namespace RSMGR
 				NL_STRING_CONVERSION_TABLE_ENTRY(rt_banned)
 				NL_STRING_CONVERSION_TABLE_ENTRY(rt_friend_dm)
 				NL_STRING_CONVERSION_TABLE_ENTRY(invalid_val)
-			};
-			static NLMISC::CStringConversion<TValues>
-			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)
-			/ sizeof(TValues_nl_string_conversion_table[0]), 
-			invalid_val);
+			};                                                                                             
+			static NLMISC::CStringConversion<TValues>                                                                
+			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)   
+			/ sizeof(TValues_nl_string_conversion_table[0]),  invalid_val);
 
 			return conversionTable;
 		}
@@ -2689,7 +2686,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CKnownUserPtr		*_PtrList;
+		CKnownUserPtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CKnownUser *loadFromCache(uint32 objectId, bool unrelease);
@@ -2716,7 +2713,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)
@@ -2964,7 +2961,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CSessionParticipantPtr		*_PtrList;
+		CSessionParticipantPtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CSessionParticipant *loadFromCache(uint32 objectId, bool unrelease);
@@ -2991,7 +2988,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)
@@ -3615,7 +3612,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CCharacterPtr		*_PtrList;
+		CCharacterPtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CCharacter *loadFromCache(uint32 objectId, bool unrelease);
@@ -3642,7 +3639,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)
@@ -3699,7 +3696,7 @@ namespace RSMGR
 			end_of_enum,
 
 			invalid_val,
-
+			
 			/// Number of enumerated values
 			nb_enum_items = 4
 		};
@@ -3732,11 +3729,10 @@ namespace RSMGR
 				NL_STRING_CONVERSION_TABLE_ENTRY(ca_edit)
 				NL_STRING_CONVERSION_TABLE_ENTRY(ca_anim)
 				NL_STRING_CONVERSION_TABLE_ENTRY(invalid_val)
-			};
-			static NLMISC::CStringConversion<TValues>
-			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)
-			/ sizeof(TValues_nl_string_conversion_table[0]), 
-			invalid_val);
+			};                                                                                             
+			static NLMISC::CStringConversion<TValues>                                                                
+			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)   
+			/ sizeof(TValues_nl_string_conversion_table[0]),  invalid_val);
 
 			return conversionTable;
 		}
@@ -3838,7 +3834,7 @@ namespace RSMGR
 			end_of_enum,
 
 			invalid_val,
-
+			
 			/// Number of enumerated values
 			nb_enum_items = 3
 		};
@@ -3869,11 +3865,10 @@ namespace RSMGR
 				NL_STRING_CONVERSION_TABLE_ENTRY(cs_logged)
 				NL_STRING_CONVERSION_TABLE_ENTRY(cs_online)
 				NL_STRING_CONVERSION_TABLE_ENTRY(invalid_val)
-			};
-			static NLMISC::CStringConversion<TValues>
-			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)
-			/ sizeof(TValues_nl_string_conversion_table[0]), 
-			invalid_val);
+			};                                                                                             
+			static NLMISC::CStringConversion<TValues>                                                                
+			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)   
+			/ sizeof(TValues_nl_string_conversion_table[0]),  invalid_val);
 
 			return conversionTable;
 		}
@@ -3974,7 +3969,7 @@ namespace RSMGR
 			end_of_enum,
 
 			invalid_val,
-
+			
 			/// Number of enumerated values
 			nb_enum_items = 2
 		};
@@ -4003,11 +3998,10 @@ namespace RSMGR
 				NL_STRING_CONVERSION_TABLE_ENTRY(ul_none)
 				NL_STRING_CONVERSION_TABLE_ENTRY(ul_public)
 				NL_STRING_CONVERSION_TABLE_ENTRY(invalid_val)
-			};
-			static NLMISC::CStringConversion<TValues>
-			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)
-			/ sizeof(TValues_nl_string_conversion_table[0]), 
-			invalid_val);
+			};                                                                                             
+			static NLMISC::CStringConversion<TValues>                                                                
+			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)   
+			/ sizeof(TValues_nl_string_conversion_table[0]),  invalid_val);
 
 			return conversionTable;
 		}
@@ -4108,7 +4102,7 @@ namespace RSMGR
 			end_of_enum,
 
 			invalid_val,
-
+			
 			/// Number of enumerated values
 			nb_enum_items = 2
 		};
@@ -4137,11 +4131,10 @@ namespace RSMGR
 				NL_STRING_CONVERSION_TABLE_ENTRY(at_normal)
 				NL_STRING_CONVERSION_TABLE_ENTRY(at_gold)
 				NL_STRING_CONVERSION_TABLE_ENTRY(invalid_val)
-			};
-			static NLMISC::CStringConversion<TValues>
-			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)
-			/ sizeof(TValues_nl_string_conversion_table[0]), 
-			invalid_val);
+			};                                                                                             
+			static NLMISC::CStringConversion<TValues>                                                                
+			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)   
+			/ sizeof(TValues_nl_string_conversion_table[0]),  invalid_val);
 
 			return conversionTable;
 		}
@@ -4244,7 +4237,7 @@ namespace RSMGR
 			end_of_enum,
 
 			invalid_val,
-
+			
 			/// Number of enumerated values
 			nb_enum_items = 4
 		};
@@ -4277,11 +4270,10 @@ namespace RSMGR
 				NL_STRING_CONVERSION_TABLE_ENTRY(lang_de)
 				NL_STRING_CONVERSION_TABLE_ENTRY(lang_other)
 				NL_STRING_CONVERSION_TABLE_ENTRY(invalid_val)
-			};
-			static NLMISC::CStringConversion<TValues>
-			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)
-			/ sizeof(TValues_nl_string_conversion_table[0]), 
-			invalid_val);
+			};                                                                                             
+			static NLMISC::CStringConversion<TValues>                                                                
+			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)   
+			/ sizeof(TValues_nl_string_conversion_table[0]),  invalid_val);
 
 			return conversionTable;
 		}
@@ -4880,7 +4872,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CRingUserPtr		*_PtrList;
+		CRingUserPtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CRingUser *loadFromCache(uint32 objectId, bool unrelease);
@@ -4907,7 +4899,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)
@@ -4963,7 +4955,7 @@ namespace RSMGR
 			end_of_enum,
 
 			invalid_val,
-
+			
 			/// Number of enumerated values
 			nb_enum_items = 3
 		};
@@ -4994,11 +4986,10 @@ namespace RSMGR
 				NL_STRING_CONVERSION_TABLE_ENTRY(rtp_variant)
 				NL_STRING_CONVERSION_TABLE_ENTRY(rtp_different)
 				NL_STRING_CONVERSION_TABLE_ENTRY(invalid_val)
-			};
-			static NLMISC::CStringConversion<TValues>
-			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)
-			/ sizeof(TValues_nl_string_conversion_table[0]), 
-			invalid_val);
+			};                                                                                             
+			static NLMISC::CStringConversion<TValues>                                                                
+			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)   
+			/ sizeof(TValues_nl_string_conversion_table[0]),  invalid_val);
 
 			return conversionTable;
 		}
@@ -5099,7 +5090,7 @@ namespace RSMGR
 			end_of_enum,
 
 			invalid_val,
-
+			
 			/// Number of enumerated values
 			nb_enum_items = 2
 		};
@@ -5128,11 +5119,10 @@ namespace RSMGR
 				NL_STRING_CONVERSION_TABLE_ENTRY(pt_rp)
 				NL_STRING_CONVERSION_TABLE_ENTRY(pt_pvp)
 				NL_STRING_CONVERSION_TABLE_ENTRY(invalid_val)
-			};
-			static NLMISC::CStringConversion<TValues>
-			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)
-			/ sizeof(TValues_nl_string_conversion_table[0]), 
-			invalid_val);
+			};                                                                                             
+			static NLMISC::CStringConversion<TValues>                                                                
+			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)   
+			/ sizeof(TValues_nl_string_conversion_table[0]),  invalid_val);
 
 			return conversionTable;
 		}
@@ -5913,24 +5903,7 @@ namespace RSMGR
 			_SessionId(NOPE::INVALID_OBJECT_ID)
 		{
 			// Default initialisation
-			_SessionType = TSessionType::st_edit;
-			_OwnerId = 0;
-			_PlanDate = 0;
-			_StartDate = 0;
-			_Orientation = TSessionOrientation::so_other;
-			_Level = R2::TSessionLevel::sl_a;
-			_RuleType = TRuleType::rt_strict;
 			_AccessType = TAccessType::at_private;
-			_State = TSessionState::ss_planned;
-			_HostShardId = 0;
-			_SubscriptionSlots = 0;
-			_ReservedSlots = 0;
-			_EstimatedDuration = TEstimatedDuration::et_short;
-			_FinalDuration = 0;
-			_FolderId = 0;
-			_AnimMode = TAnimMode::am_dm;
-			_GuildFilter = TGuildFilter::gf_only_my_guild;
-			_SubscriptionClosed = 0;
 			_Newcomer = 1;
 			_SessionParticipants = NULL;
 			_GuildInvites = NULL;
@@ -6037,7 +6010,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CSessionPtr		*_PtrList;
+		CSessionPtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CSession *loadFromCache(uint32 objectId, bool unrelease);
@@ -6064,7 +6037,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)
@@ -6122,7 +6095,7 @@ namespace RSMGR
 			end_of_enum,
 
 			invalid_val,
-
+			
 			/// Number of enumerated values
 			nb_enum_items = 4
 		};
@@ -6155,11 +6128,10 @@ namespace RSMGR
 				NL_STRING_CONVERSION_TABLE_ENTRY(ds_restricted)
 				NL_STRING_CONVERSION_TABLE_ENTRY(ds_open)
 				NL_STRING_CONVERSION_TABLE_ENTRY(invalid_val)
-			};
-			static NLMISC::CStringConversion<TValues>
-			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)
-			/ sizeof(TValues_nl_string_conversion_table[0]), 
-			invalid_val);
+			};                                                                                             
+			static NLMISC::CStringConversion<TValues>                                                                
+			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)   
+			/ sizeof(TValues_nl_string_conversion_table[0]),  invalid_val);
 
 			return conversionTable;
 		}
@@ -6446,7 +6418,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CShardPtr		*_PtrList;
+		CShardPtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CShard *loadFromCache(uint32 objectId, bool unrelease);
@@ -6473,7 +6445,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)
@@ -6720,7 +6692,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CGuildPtr		*_PtrList;
+		CGuildPtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CGuild *loadFromCache(uint32 objectId, bool unrelease);
@@ -6747,7 +6719,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)
@@ -6948,7 +6920,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CGuildInvitePtr		*_PtrList;
+		CGuildInvitePtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CGuildInvite *loadFromCache(uint32 objectId, bool unrelease);
@@ -6975,7 +6947,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)
@@ -7287,7 +7259,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CPlayerRatingPtr		*_PtrList;
+		CPlayerRatingPtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CPlayerRating *loadFromCache(uint32 objectId, bool unrelease);
@@ -7314,7 +7286,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)
@@ -7370,7 +7342,7 @@ namespace RSMGR
 			end_of_enum,
 
 			invalid_val,
-
+			
 			/// Number of enumerated values
 			nb_enum_items = 2
 		};
@@ -7399,11 +7371,10 @@ namespace RSMGR
 				NL_STRING_CONVERSION_TABLE_ENTRY(jet_credits)
 				NL_STRING_CONVERSION_TABLE_ENTRY(jet_notes)
 				NL_STRING_CONVERSION_TABLE_ENTRY(invalid_val)
-			};
-			static NLMISC::CStringConversion<TValues>
-			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)
-			/ sizeof(TValues_nl_string_conversion_table[0]), 
-			invalid_val);
+			};                                                                                             
+			static NLMISC::CStringConversion<TValues>                                                                
+			conversionTable(TValues_nl_string_conversion_table, sizeof(TValues_nl_string_conversion_table)   
+			/ sizeof(TValues_nl_string_conversion_table[0]),  invalid_val);
 
 			return conversionTable;
 		}
@@ -7714,7 +7685,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CJournalEntryPtr		*_PtrList;
+		CJournalEntryPtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CJournalEntry *loadFromCache(uint32 objectId, bool unrelease);
@@ -7741,7 +7712,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)
@@ -8015,7 +7986,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CFolderPtr		*_PtrList;
+		CFolderPtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CFolder *loadFromCache(uint32 objectId, bool unrelease);
@@ -8042,7 +8013,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)
@@ -8244,7 +8215,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CFolderAccessPtr		*_PtrList;
+		CFolderAccessPtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CFolderAccess *loadFromCache(uint32 objectId, bool unrelease);
@@ -8271,7 +8242,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)
@@ -8708,7 +8679,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CScenarioPtr		*_PtrList;
+		CScenarioPtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CScenario *loadFromCache(uint32 objectId, bool unrelease);
@@ -8735,7 +8706,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)
@@ -9079,7 +9050,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CSessionLogPtr		*_PtrList;
+		CSessionLogPtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CSessionLog *loadFromCache(uint32 objectId, bool unrelease);
@@ -9106,7 +9077,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)
@@ -9281,7 +9252,7 @@ namespace RSMGR
 		time_t					_ReleaseDate;
 
 		/// The linked list of pointer on this object
-		CGmStatusPtr		*_PtrList;
+		CGmStatusPtr		*_PtrList;			
 
 		// Try to load the specified object from the memory cache, return NULL if the object is not in the cache
 		static CGmStatus *loadFromCache(uint32 objectId, bool unrelease);
@@ -9308,7 +9279,7 @@ namespace RSMGR
 		}
 
 	public:
-
+	
 		/** Return the object identifier (witch is unique)
 		 *	You can only call this method on a persistent instance.
 		 *	(because transient instance can have invalid id)

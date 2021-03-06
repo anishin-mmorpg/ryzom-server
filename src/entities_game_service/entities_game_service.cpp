@@ -986,10 +986,6 @@ void CPlayerService::egsAddMonkeyPlayer()
 			}
 			idx++;
 		}
-		else
-		{
-			return;
-		}
 	}
 
 	if( PlayerManager.getPlayer( userId ) != 0 )
@@ -3723,7 +3719,7 @@ NLMISC_COMMAND( createItemInBagTest," create_item_in_bag", "player id(id:type:cr
 		{
 			string sheetName = args[1];
 			if (sheetName.find(".") == string::npos)
-				sheetName += string(".sitem");
+				sheetName += string(".item");
 			sheet = CSheetId(sheetName.c_str());
 		}
 		uint quantity, quality;

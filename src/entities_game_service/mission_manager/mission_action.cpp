@@ -599,7 +599,6 @@ class CMissionActionRecvItem : public IMissionAction
 		instance->getEntities(entities);
 		if ( entities.empty() )
 			return;
-		nlassert(instance);
 		if ( dynamic_cast<CMissionSolo*>(instance) )
 		{
 			if ( _Group )
@@ -958,7 +957,6 @@ class CMissionActionRecvNamedItem : public IMissionAction
 		instance->getEntities(entities);
 		if ( entities.empty() )
 			return;
-		nlassert(instance);
 		if ( dynamic_cast<CMissionSolo*>(instance) )
 		{
 			if ( _Group )
@@ -1626,7 +1624,6 @@ class CMissionActionLearnBrick : public IMissionAction
 		instance->getEntities(entities);
 		if ( entities.empty() )
 			return;
-		nlassert(instance);
 		if ( dynamic_cast<CMissionSolo*>(instance) )
 		{
 			if ( _Group )
@@ -1771,7 +1768,6 @@ class CMissionActionUnlearnBrick : public IMissionAction
 		instance->getEntities(entities);
 		if ( entities.empty() )
 			return;
-		nlassert(instance);
 		if ( dynamic_cast<CMissionSolo*>(instance) )
 		{
 			if ( _Group )
@@ -2726,8 +2722,8 @@ class CMissionActionFailMissionCat : public IMissionAction
 			MISLOGSYNTAXERROR("<mission_category>");
 			return false;
 		}
-		_MissionCategory = NLMISC::toLowerAscii(CMissionParser::getNoBlankString(script[1]));
-		if (NLMISC::toLowerAscii(missionData.Template->MissionCategory) == _MissionCategory)
+		_MissionCategory = NLMISC::toLower(CMissionParser::getNoBlankString(script[1]));
+		if (NLMISC::toLower(missionData.Template->MissionCategory) == _MissionCategory)
 		{
 			MISLOGERROR1("a mission cannot make fail its own category '%s'", _MissionCategory.c_str());
 			return false;
@@ -2762,7 +2758,7 @@ class CMissionActionFailMissionCat : public IMissionAction
 				pMissTemplate = pMM->getTemplate(pMiss->getTemplateId());
 				if (pMissTemplate != NULL)
 				{
-					if (NLMISC::toLowerAscii(pMissTemplate->MissionCategory) == _MissionCategory)
+					if (NLMISC::toLower(pMissTemplate->MissionCategory) == _MissionCategory)
 					{
 						pMiss->onFailure(true, false);
 						bFailed = true;
@@ -2775,7 +2771,7 @@ class CMissionActionFailMissionCat : public IMissionAction
 					pMissTemplate = pMM->getTemplate(pMiss->getMainMissionTemplateId());
 					if (pMissTemplate != NULL)
 					{
-						if (NLMISC::toLowerAscii(pMissTemplate->MissionCategory) == _MissionCategory)
+						if (NLMISC::toLower(pMissTemplate->MissionCategory) == _MissionCategory)
 							pMiss->onFailure(true, false);
 					}
 				}
@@ -4360,7 +4356,7 @@ class CMissionActionSetRespawnPoints : public IMissionAction
 		CMissionParser::tokenizeString(script[2], ";", args);
 
 		// check that the given respawn points exist and are all in the same continent
-		CONTINENT::TContinent lastContinent = CONTINENT::UNKNOWN;
+		CONTINENT::TContinent lastContinent;
 		for (uint i = 0; i < args.size(); i++)
 		{
 			string respawnPointName = CMissionParser::getNoBlankString(args[i]);

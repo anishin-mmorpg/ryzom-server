@@ -650,7 +650,6 @@ CMissionEvent::TResult CMissionBaseBehaviour::processEvent( const TDataSetRow & 
 	{
 		MISDBG("%s ok, step %u done -> mission completed", sDebugPrefix.c_str(), currentStep->getIndexInTemplate() );
 		templ->AlreadyDone = true;
-		nlassert(user);
 		if(!user->isShopingListInProgress())
 			user->endBotChat();
 		return CMissionEvent::MissionEnds;
@@ -661,7 +660,6 @@ CMissionEvent::TResult CMissionBaseBehaviour::processEvent( const TDataSetRow & 
 		MISDBG("%s ok, step %u done -> mission failed", sDebugPrefix.c_str(), currentStep->getIndexInTemplate() );
 		_ProcessingState = Normal;
 		onFailure( true );
-		nlassert(user);
 		if(!user->isShopingListInProgress())
 			user->endBotChat();
 		return CMissionEvent::MissionFailed;

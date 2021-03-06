@@ -291,12 +291,10 @@ void CPetSpawnMsgImp::callback(std::string const& name, NLNET::TServiceId id)
 			
 			botPet->setSheet(sheet);
 
-#ifdef RYZOM_FORGE_PET_NAME
 			if (!CustomName.empty())
 			{
 				botPet->setCustomName(CustomName);
 			}
-#endif
 			
 			if (!botPet->spawn())
 			{

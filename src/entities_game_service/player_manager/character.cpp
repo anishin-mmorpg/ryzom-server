@@ -423,21 +423,16 @@ CCharacter::CCharacter():	CEntityBase(false),
 	for (uint i = 0 ; i < (PVP_CLAN::EndClans-PVP_CLAN::BeginClans+1); ++i)
 		_FactionPoint[i] = 0;
 
-#ifdef RYZOM_FORGE
 	_PvpPoint = 0;
-#endif
-
 	_PVPFlagLastTimeChange = 0;
 	_PVPFlagTimeSettedOn = 0;
 	_PvPDatabaseCounter = 0;
 	_PVPFlag = false;
 	_PVPRecentActionTime = 0;
 
-#ifdef RYZOM_FORGE
 	_Organization = 0;
 	_OrganizationStatus = 0;
 	_OrganizationPoints = 0;
-#endif
 
 	// do not start berserk
 	_IsBerserk = false;
@@ -665,9 +660,7 @@ CCharacter::CCharacter():	CEntityBase(false),
 	// For client/server contact list communication
 	_ContactIdPool= 0;
 
-#ifdef RYZOM_FORGE_ROOM
 	_inRoomOfPlayer = CEntityId::Unknown;
-#endif
 
 	for(uint i = 0; i < BRICK_FAMILIES::NbFamilies; ++i )
 		_BrickFamilyBitField[i] = 0;
@@ -676,20 +669,16 @@ CCharacter::CCharacter():	CEntityBase(false),
 
 	_LastTickNpcControlUpdated = CTickEventHandler::getGameCycle();
 
-#ifdef RYZOM_FORGE
 	_LastWebCommandIndex = 0;
 	_LastUrlIndex = 0;
 
 
 	_CustomMissionsParams.clear();
-#endif
 
 	_FriendVisibility = VisibleToAll;
 
-#ifdef RYZOM_FORGE
 	_LangChannel = "en";
 	_NewTitle = "Refugee";
-#endif
 
 	initDatabase();
 } // CCharacter  //
@@ -715,9 +704,7 @@ void CCharacter::clear()
 	_ForbidAuraUseStartDate=0;
 	_ForbidAuraUseEndDate=0;
 	_Title= CHARACTER_TITLE::Refugee;
-#ifdef RYZOM_FORGE
 	_NewTitle = "Refugee";
-#endif
 
 	SET_STRUCT_MEMBER(_VisualPropertyA,PropertySubData.HatModel,0);
 	SET_STRUCT_MEMBER(_VisualPropertyA,PropertySubData.HatColor,0);
@@ -2917,9 +2904,7 @@ void CCharacter::postLoadTreatment()
 				_PlayerPets[ i ].Slot = INVENTORIES::INVALID_INVENTORY_SLOT;
 			}
 
-#ifdef RYZOM_FORGE_PET_NAME
 			sendPetCustomNameToClient(i);
-#endif
 			uint32 slot = _PlayerPets[ i ].initLinkAnimalToTicket( this, i );
 			if( slot < INVENTORIES::NbPackerSlots )
 			{
@@ -3040,7 +3025,6 @@ void CCharacter::postLoadTreatment()
 		computeMiscBonus();
 	}
 
-	// Always enable XP Catalyaer for non-trial accounts
 	CPlayer * p = PlayerManager.getPlayer(PlayerManager.getPlayerId( getId() ));
 	if (!p->isTrialPlayer())
 	{
@@ -3722,7 +3706,7 @@ void CCharacter::setTargetBotchatProgramm( CEntityBase * target, const CEntityId
 		{
 			// send the web page title
 			uint32 text;
-			if (NLMISC::startsWith(c->getWebPageName(), "MENU_")) // TODO: What is this?
+			if(c->getWebPageName().find("MENU_") == 0)
 			{
 				text = STRING_MANAGER::sendStringToClient(_EntityRowId, c->getWebPageName(), TVectorParamCheck() );
 			}
@@ -3739,7 +3723,6 @@ void CCharacter::setTargetBotchatProgramm( CEntityBase * target, const CEntityId
 			SM_STATIC_PARAMS_1(params, STRING_MANAGER::literal);
 			string url = c->getWebPage();
 
-#ifdef RYZOM_FORGE
 			// add ? or & with
 			if ( url.find('?') == string::npos )
 				url += NLMISC::toString("?urlidx=%d", getUrlIndex());
@@ -3747,7 +3730,6 @@ void CCharacter::setTargetBotchatProgramm( CEntityBase * target, const CEntityId
 				url += NLMISC::toString("&urlidx=%d", getUrlIndex());
 
 			setUrlIndex(getUrlIndex()+1);
-#endif
 
 			url += "&player_eid="+getId().toString();
 
@@ -3757,7 +3739,7 @@ void CCharacter::setTargetBotchatProgramm( CEntityBase * target, const CEntityId
 			string defaultSalt = toString(getLastConnectedDate());
 			nlinfo(defaultSalt.c_str());
 			nlinfo(url.c_str());
-			string control = "&hmac="+NLMISC::getHMacSHA1((uint8*)&url[0], (uint32)url.size(), (uint8*)&defaultSalt[0], (uint32)defaultSalt.size()).toString();
+			string control = "&hmac="+getHMacSHA1((uint8*)&url[0], (uint32)url.size(), (uint8*)&defaultSalt[0], (uint32)defaultSalt.size()).toString();
 
 			params[0].Literal= url+control;
 
@@ -3911,9 +3893,15 @@ void CCharacter::sendBetaTesterStatus()
 
 	sendReservedTitleStatus( CHARACTER_TITLE::FBT, p->isBetaTester() );
 
-	if (!p->isBetaTester() && _Title == CHARACTER_TITLE::FBT)
+	/*if (!p->isBetaTester() && _Title == CHARACTER_TITLE::FBT)
 	{
 		_Title = CHARACTER_TITLE::Refugee;
+		registerName();
+	}*/
+
+	if (!p->isBetaTester() && _NewTitle == "FBT")
+	{
+		_NewTitle = "Refugee";
 		registerName();
 	}
 }
@@ -3929,9 +3917,15 @@ void CCharacter::sendWindermeerStatus()
 
 	sendReservedTitleStatus( CHARACTER_TITLE::WIND, p->isWindermeerCommunity() );
 
-	if ( !p->isWindermeerCommunity() && _Title == CHARACTER_TITLE::WIND)
+	/*if ( !p->isWindermeerCommunity() && _Title == CHARACTER_TITLE::WIND)
 	{
 		_Title = CHARACTER_TITLE::Refugee;
+		registerName();
+	}*/
+
+	if ( !p->isWindermeerCommunity() && _NewTitle == "WIND")
+	{
+		_NewTitle = "Refugee";
 		registerName();
 	}
 }
@@ -5590,9 +5584,7 @@ bool CCharacter::spawnWaitingCharacterAnimalNear( uint index, const SGameCoordin
 	msg.CharacterMirrorRow = _EntityRowId;
 	msg.PetSheetId = _PlayerPets[ index ].PetSheetId;
 	msg.PetIdx = index;
-#ifdef RYZOM_FORGE_PET_NAME
 	msg.CustomName = _PlayerPets[ index ].CustomName;
-#endif
 	msg.AIInstanceId = (uint16)destAIInstance;
 	CWorldInstances::instance().msgToAIInstance( msg.AIInstanceId, msg);
 	// The row will be received in AnimalSpawned()
@@ -5704,9 +5696,7 @@ bool CCharacter::spawnCharacterAnimal(uint index )
 			msg.CharacterMirrorRow = _EntityRowId;
 			msg.PetSheetId = _PlayerPets[ index ].PetSheetId;
 			msg.PetIdx = index;
-#ifdef RYZOM_FORGE_PET_NAME
 			msg.CustomName = _PlayerPets[ index ].CustomName;
-#endif
 
 			CVector pos;
 			pos.x = msg.Coordinate_X * 0.001f;
@@ -6886,7 +6876,6 @@ void CCharacter::sendAnimalCommand( uint8 petIndexCode, uint8 command )
 	}
 }
 
-#ifdef RYZOM_FORGE_PET_NAME
 void CCharacter::setAnimalName( uint8 petIndex, ucstring customName )
 {
 	if (petIndex < 0 || petIndex >= MAX_INVENTORY_ANIMAL)
@@ -6922,7 +6911,6 @@ void CCharacter::sendPetCustomNameToClient(uint8 petIndex)
 	}
 	CBankAccessor_PLR::getPACK_ANIMAL().getBEAST(petIndex).setNAME(_PropertyDatabase, textId);
 }
-#endif
 
 
 //-----------------------------------------------
@@ -7936,11 +7924,13 @@ void CCharacter::endHarvest(bool sendCloseTempImpulsion)
 	_DepositSearchSkill = SKILLS::unknown;
 	_MpIndex = 0xff;
 	_DepositHarvestInformation.DepositIndex = 0xffffffff;
-	bool sendCloseTemp = false;
 
 	if ( _DepositHarvestInformation.Sheet != CSheetId::Unknown/*_DepositHarvestInformation.EndCherchingTime != 0xffffffff && _DepositHarvestInformation.EndCherchingTime > CTickEventHandler::getGameCycle()*/ )
 	{
-		sendCloseTemp = true;
+		if ( sendCloseTempImpulsion )
+		{
+			sendCloseTempInventoryImpulsion();
+		}
 	}
 
 	if ( _MpSourceId != CEntityId::Unknown || _MpSourceSheetId != CSheetId::Unknown )
@@ -7951,7 +7941,8 @@ void CCharacter::endHarvest(bool sendCloseTempImpulsion)
 		{
 			creature->resetHarvesterRowId();
 			// only send interupt message if some rm remains on the corpse
-			sendCloseTemp = true;
+			if ( sendCloseTempImpulsion )
+				sendCloseTempInventoryImpulsion();
 		}
 
 		// send end loot behaviour
@@ -7963,11 +7954,6 @@ void CCharacter::endHarvest(bool sendCloseTempImpulsion)
 	}
 
 	clearHarvestDB();
-	
-	if (sendCloseTemp && sendCloseTempImpulsion)
-	{
-		sendCloseTempInventoryImpulsion(true);
-	}
 
 } // endHarvest //
 
@@ -8100,9 +8086,7 @@ void CCharacter::setStartStatistics( const CCreateCharMsg& createCharMsg )
 	_Race				= (EGSPD::CPeople::TPeople) createCharMsg.People;
 	_Gender				= createCharMsg.Sex;
 	_Title				= CHARACTER_TITLE::Refugee;
-#ifdef RYZOM_FORGE
 	_NewTitle			= "Refugee";
-#endif
 
 	// fame information
 	// Players start out as Neutral in their declared clans
@@ -8397,20 +8381,11 @@ void CCharacter::setStartStatistics( const CCreateCharMsg& createCharMsg )
 	RYZOM_STARTING_POINT::TStartPoint sp = createCharMsg.StartPoint;
 	if( sp < RYZOM_STARTING_POINT::stalli || sp >= RYZOM_STARTING_POINT::NB_START_POINTS )
 	{
-		// FIXME: There's no safety on player race for starting zone. -Kaetemi
-		// See checkCreateParams for fixing this.
-#ifdef RYZOM_FORGE
-		if (UseNewNewbieLandStartingPoint)
-		{
+		if(UseNewNewbieLandStartingPoint)
 			sp = RYZOM_STARTING_POINT::starting_city;
-		}
 		else
-#else
-		{
-			// sp = RYZOM_STARTING_POINT::stalli;
+//			sp = RYZOM_STARTING_POINT::stalli;
 			sp = RYZOM_STARTING_POINT::starting_city;
-		}
-#endif
 		nlwarning( "Invalid start point %d", sp );
 	}
 
@@ -9050,7 +9025,7 @@ void CCharacter::setDatabase()
 	_IneffectiveAuras.activate();
 	_ConsumableOverdoseEndDates.activate();
 	// init the RRPs
-	RingRewardPoints.initDb();
+	//RingRewardPoints.initDb();
 
 }// setDatabase //
 
@@ -9113,7 +9088,7 @@ void CCharacter::startTradeItemSession( uint16 session )
 		fame = MinFameToTrade;
 	}
 	
-	else if ( fame < MinFameToTrade )
+	if ( (bot->getOrganization() == 0 && fame < MinFameToTrade) || (bot->getOrganization() != 0 && bot->getOrganization() != getOrganization()) )
 	{
 		SM_STATIC_PARAMS_1(params, STRING_MANAGER::bot);
 		params[0].setEIdAIAlias( _CurrentInterlocutor, CAIAliasTranslator::getInstance()->getAIAlias(_CurrentInterlocutor) );
@@ -9121,6 +9096,8 @@ void CCharacter::startTradeItemSession( uint16 session )
 		npcTellToPlayerEx( bot->getEntityRowId(),_EntityRowId,txt );
 		return;
 	}
+	else if (bot->getOrganization() != 0 && bot->getOrganization() == getOrganization())
+		fame = 0;
 
 
 	float fameFactor = 1.0f;
@@ -9219,7 +9196,8 @@ void CCharacter::startTradePhrases(uint16 session)
 	{
 		nlwarning("fame %u is INVALID",(uint)bot->getRace() );
 	}
-	if ( fame < MinFameToTrade )
+	
+	if ( (bot->getOrganization() == 0 && fame < MinFameToTrade) || (bot->getOrganization() != 0 && bot->getOrganization() != getOrganization()) )
 	{
 		SM_STATIC_PARAMS_1(params, STRING_MANAGER::bot);
 		params[0].setEIdAIAlias( _CurrentInterlocutor, CAIAliasTranslator::getInstance()->getAIAlias(_CurrentInterlocutor) );
@@ -9476,8 +9454,6 @@ void CCharacter::fillTradePage(uint16 session, bool enableBuildingLossWarning)
 			itemElem.setQUALITY(_PropertyDatabase, 0);
 //			_PropertyDatabase.setProp( NLMISC::toString("TRADING:%u:USER_COLOR",index  ),  1 );
 			itemElem.setUSER_COLOR(_PropertyDatabase, 1);
-//			_PropertyDatabase.setProp( NLMISC::toString("TRADING:%u:CHARAC_BUFFS",index  ),  0 );
-			itemElem.setCHARAC_BUFFS(_PropertyDatabase, 0);
 //			_PropertyDatabase.setProp( NLMISC::toString("TRADING:%u:WEIGHT",index  ),  0 );
 			itemElem.setWEIGHT(_PropertyDatabase, 0);
 //			_PropertyDatabase.setProp( NLMISC::toString("TRADING:%u:INFO_VERSION",index  ),  0 );
@@ -9520,8 +9496,6 @@ void CCharacter::fillTradePage(uint16 session, bool enableBuildingLossWarning)
 		itemElem.setQUALITY(_PropertyDatabase, 0);
 //		_PropertyDatabase.setProp( NLMISC::toString("TRADING:%u:USER_COLOR",index  ),  1 );
 		itemElem.setUSER_COLOR(_PropertyDatabase, 1);
-//		_PropertyDatabase.setProp( NLMISC::toString("TRADING:%u:CHARAC_BUFFS",index  ),  0 );
-		itemElem.setCHARAC_BUFFS(_PropertyDatabase, 0);
 //		_PropertyDatabase.setProp( NLMISC::toString("TRADING:%u:WEIGHT",index  ),  0 );
 		itemElem.setWEIGHT(_PropertyDatabase, 0);
 //		_PropertyDatabase.setProp( NLMISC::toString("TRADING:%u:INFO_VERSION",index  ),  0 );
@@ -9951,11 +9925,7 @@ bool CCharacter::queryItemPrice( const CGameItemPtr item, uint32& price )
 	quality = theItem->quality();
 	if ( theItem->maxDurability() )
 		wornFactor = float(theItem->durability()) / float(theItem->maxDurability());
-#ifdef RYZOM_FORGE
 	price = (uint32) ( CShopTypeManager::computeBasePrice( theItem, quality ) * wornFactor * 0.02 );
-#else
-	price = (uint32) ( CShopTypeManager::computeBasePrice( theItem, quality ) * wornFactor );
-#endif
 	return true;
 }
 
@@ -9997,7 +9967,7 @@ void CCharacter::sellItem( INVENTORIES::TInventory inv, uint32 slot, uint32 quan
 		fame = MinFameToTrade;
 	}
 
-	else if ( fame < MinFameToTrade )
+	if ( (bot->getOrganization() == 0 && fame < MinFameToTrade) || (bot->getOrganization() != 0 && bot->getOrganization() != getOrganization()) )
 	{
 		SM_STATIC_PARAMS_1(params, STRING_MANAGER::bot);
 		params[0].setEIdAIAlias( _CurrentInterlocutor, CAIAliasTranslator::getInstance()->getAIAlias(_CurrentInterlocutor) );
@@ -10009,6 +9979,8 @@ void CCharacter::sellItem( INVENTORIES::TInventory inv, uint32 slot, uint32 quan
 
 		return;
 	}
+	else if (bot->getOrganization() != 0 && bot->getOrganization() == getOrganization())
+		fame = 0;
 
 	CInventoryPtr child = _Inventory[ inv ];
 	if( child->getSlotCount() > slot && child->getItem( slot ) != NULL )
@@ -10041,6 +10013,13 @@ void CCharacter::sellItem( INVENTORIES::TInventory inv, uint32 slot, uint32 quan
 						_Id.toString().c_str(),
 						slot,
 						sheet.toString().c_str() );
+			return;
+		}
+
+		// You cannot exchange genesis named items
+		if (item->getPhraseId().find("genesis_") == 0)
+		{
+			nlwarning("Character %s tries to sell '%s'", _Id.toString().c_str(), item->getPhraseId().c_str() );
 			return;
 		}
 
@@ -10153,8 +10132,6 @@ void CCharacter::sellItem( INVENTORIES::TInventory inv, uint32 slot, uint32 quan
 //-----------------------------------------------------------------------------
 void CCharacter::itemSolded( uint32 identifier, uint32 quantity, uint32 sellPrice, uint32 basePrice, const CEntityId& buyer, bool sellOffline )
 {
-	// TODO_RYZOMCLASSIC: Log buyer, etc? Item store logging seems lacking. -Kaetemi
-	TLogContext_Item_SaleStoreSold logContext(_Id);
 	CSmartPtr< IItemTrade > itemTrade = _ItemsInShopStore->removeItem( identifier, quantity, sellOffline );
 	if( itemTrade != 0 )
 	{
@@ -10348,7 +10325,7 @@ void CCharacter::initFactionPointDb()
 	}
 }
 
-#ifdef RYZOM_FORGE
+
 //-----------------------------------------------
 // setPvpPoint : set the number of pvp point
 //
@@ -10453,7 +10430,7 @@ void CCharacter::initOrganizationInfos()
 	CBankAccessor_PLR::getUSER().getRRPS_LEVELS(2).setVALUE(_PropertyDatabase, _OrganizationStatus );
 	CBankAccessor_PLR::getUSER().getRRPS_LEVELS(3).setVALUE(_PropertyDatabase, _OrganizationPoints );
 }
-#endif
+
 
 //-----------------------------------------------------------------------------
 void CCharacter::sendFactionPointGainMessage(PVP_CLAN::TPVPClan clan, uint32 fpGain)
@@ -11688,12 +11665,7 @@ void CCharacter::setBerserkFlag(bool isBerserk)
 				}
 				else
 				{
-#ifdef RYZOM_FORGE
 					sint8 percentTmp = sint8( (127.0 * ( target->getPhysScores()._PhysicalScores[ SCORES::hit_points ].Current ) ) / ( target->getPhysScores()._PhysicalScores[ SCORES::hit_points ].Max ) );
-#else
-					// TODO: Find out why this was changed to 127?
-					sint8 percentTmp = sint8( (100.0 * ( target->getPhysScores()._PhysicalScores[ SCORES::hit_points ].Current ) ) / ( target->getPhysScores()._PhysicalScores[ SCORES::hit_points ].Max ) );
-#endif
 					if( percentTmp < 0 )
 						percent = 0;
 					else
@@ -12073,7 +12045,7 @@ bool CCharacter::processMissionEventList( std::list< CMissionEvent* > & eventLis
 	bool processed = false;
 
 	bool firstEvent = true;
-	CGuild *guild = NULL;
+	CGuild * guild = CGuildManager::getInstance()->getGuildFromId( _GuildId );
 	while ( !eventList.empty() )
 	{
 		bool eventProcessed = false;
@@ -12097,7 +12069,6 @@ bool CCharacter::processMissionEventList( std::list< CMissionEvent* > & eventLis
 			else
 			{
 				// We find the guild and each guild members and we instanciate the mission for them
-				guild = CGuildManager::getInstance()->getGuildFromId(_GuildId);
 				if (guild)
 				{
 					for ( std::map<EGSPD::TCharacterId, EGSPD::CGuildMemberPD*>::iterator it = guild->getMembersBegin();
@@ -12879,7 +12850,7 @@ void CCharacter::updateSavedMissions()
 				TVectorParamCheck params(1);
 				sint32 x = 0;
 				sint32 y = 0;
-				const char *msg;
+				string msg;
 				CCreature * c = CreatureManager.getCreature( CAIAliasTranslator::getInstance()->getEntityId( (*itCompass).second.getBotId() ) );
 				if ( c )
 				{
@@ -13138,7 +13109,7 @@ void CCharacter::registerName(const ucstring &newName)
 	CMessage msgName("CHARACTER_NAME_LANG");
 	msgName.serial(_EntityRowId);
 
-	string sTitle = CHARACTER_TITLE::toString(_Title);
+	string sTitle = getFullTitle();
 	ucstring RegisteredName;
 	if (newName.empty())
 		RegisteredName = getName() + string("$") + sTitle + string("$");
@@ -13312,7 +13283,6 @@ void CCharacter::setPlaces(const std::vector<const CPlace*> & places)
 	}
 }
 
-#ifdef RYZOM_FORGE
 //-----------------------------------------------
 //	isSpawnValid
 //-----------------------------------------------
@@ -13372,7 +13342,6 @@ bool CCharacter::isSpawnValid(bool inVillage, bool inOutpost, bool inStable, boo
 
 	return true;
 }
-#endif
 
 //-----------------------------------------------
 // memorize
@@ -13901,7 +13870,6 @@ uint16 CCharacter::getFirstFreeSlotInKnownPhrase()
 	return (uint16)_KnownPhrases.size()-1;
 } // getFirstFreeSlotInKnownPhrase //
 
-#ifdef RYZOM_FORGE
 
 void CCharacter::sendDynamicMessage(const string &phrase, const string &message)
 {
@@ -13923,12 +13891,12 @@ void CCharacter::sendUrl(const string &url, const string &salt)
 	string control;
 	if (!salt.empty())
 	{
-		control = "&hmac="+NLMISC::getHMacSHA1((uint8*)&url[0], (uint32)url.size(), (uint8*)&salt[0], (uint32)salt.size()).toString();
+		control = "&hmac="+getHMacSHA1((uint8*)&url[0], (uint32)url.size(), (uint8*)&salt[0], (uint32)salt.size()).toString();
 	}
 	else
 	{
 		string defaultSalt = toString(getLastConnectedDate());
-		control = "&hmac="+NLMISC::getHMacSHA1((uint8*)&url[0], (uint32)url.size(), (uint8*)&defaultSalt[0], (uint32)defaultSalt.size()).toString();
+		control = "&hmac="+getHMacSHA1((uint8*)&url[0], (uint32)url.size(), (uint8*)&defaultSalt[0], (uint32)defaultSalt.size()).toString();
 	}
 
 	nlinfo(url.c_str());
@@ -13999,9 +13967,7 @@ string CCharacter::getCustomMissionText(const string &missionName)
 	return "";
 }
 
-#endif
 
-#ifdef RYZOM_FORGE
 // !!! Deprecated !!!
 void CCharacter::addWebCommandCheck(const string &url, const string &data, const string &salt)
 {
@@ -14110,12 +14076,11 @@ uint CCharacter::checkWebCommand(const string &url, const string &data, const st
 	if (slot == INVENTORIES::NbBagSlots)
 		return slot;
 	string checksum = url + data + getId().toString();
-	string realhmac = NLMISC::getHMacSHA1((uint8*)&checksum[0], (uint32)checksum.size(), (uint8*)&salt[0], (uint32)salt.size()).toString();
+	string realhmac = getHMacSHA1((uint8*)&checksum[0], (uint32)checksum.size(), (uint8*)&salt[0], (uint32)salt.size()).toString();
 	if (realhmac == hmac)
 		return slot;
 	return INVENTORIES::NbBagSlots;
 }
-#endif
 
 
 //-----------------------------------------------
@@ -14343,7 +14308,6 @@ bool CCharacter::pickUpRawMaterial( uint32 indexInTempInv, bool * lastMaterial )
 
 		// Send url for Arcc triggers
 
-#ifdef RYZOM_FORGE
 		vector<string> params = getCustomMissionParams("__LOOT_SHEET__");
 		if (params.size() >= 2)
 		{
@@ -14385,8 +14349,6 @@ bool CCharacter::pickUpRawMaterial( uint32 indexInTempInv, bool * lastMaterial )
 				}
 			}
 		}
-#endif
-
 		// first slots are filled with loot items, quarter items are not in temp inv but only info in DB
 		uint32 rawMaterialIndex = indexInTempInv - creature->getLootSlotCount();
 		const CCreatureRawMaterial * mp = creature->getCreatureRawMaterial( rawMaterialIndex );
@@ -14481,35 +14443,17 @@ bool CCharacter::pickUpRawMaterial( uint32 indexInTempInv, bool * lastMaterial )
 //-----------------------------------------------
 // sendCloseTempInventoryImpulsion
 //-----------------------------------------------
-void CCharacter::sendCloseTempInventoryImpulsion(bool onlyIfEmpty)
+void CCharacter::sendCloseTempInventoryImpulsion()
 {
 	// Sage: May 9 2007
 	// The live servers are crashing due to an infinite indirect recursion loop
 	// itemTempInventoryToBag() calls endHarvest() calls sendCloseTempInventoryImpulsion() calls getAllTempInventoryItems() calls itemTempInventoryToBag() ...
 	// the following anti bug is a temporaray fix to prevent inifinte recursion and stack overflow
-	static bool isRecursing = false;																	// **** Temp Fix 1/4 **** //
-	
-	if (onlyIfEmpty)
-	{
-		CInventoryPtr tempInv = getInventory(INVENTORIES::temporary);
-		nlassert(tempInv != NULL);
-		if (tempInv->getUsedSlotCount())
-		{
-			nldebug("Temporary inventory is not empty, do not send impulsion to close");
-			return;
-		}
-	}
-	
-	if (!onlyIfEmpty)
-	{
-		BOMB_IF(isRecursing, "CCharacter::sendCloseTempInventoryImpulsion is recursing!", return);		// **** Temp Fix 2/4 **** //
-		isRecursing = true;																				// **** Temp Fix 3/4 **** //
+	static bool isRecursing= false;																	// **** Temp Fix 1/4 **** //
+	BOMB_IF(isRecursing,"CCharacter::sendCloseTempInventoryImpulsion is recursing!",return);		// **** Temp Fix 2/4 **** //
+	isRecursing= true;																				// **** Temp Fix 3/4 **** //
 
-		// Take all items
-		getAllTempInventoryItems();
-
-		isRecursing= false;																				// **** Temp Fix 4/4 **** //
-	}
+	getAllTempInventoryItems(false);
 
 	CMessage msgout( "IMPULSION_ID" );
 	msgout.serial( _Id );
@@ -14522,6 +14466,7 @@ void CCharacter::sendCloseTempInventoryImpulsion(bool onlyIfEmpty)
 	msgout.serialBufferWithSize((uint8*)bms.buffer(), bms.length());
 	CUnifiedNetwork::getInstance()->send( NLNET::TServiceId(_Id.getDynamicId()), msgout );
 
+	isRecursing= false;																				// **** Temp Fix 4/4 **** //
 } // sendCloseTempInventoryImpulsion //
 
 //-----------------------------------------------
@@ -14629,15 +14574,15 @@ void CCharacter::resetFameDatabase()
 	// Check fames and fix bad values
 	if (!haveAnyPrivilege())
 	{
-		CFameManager::getInstance().enforceFameCaps(getId(), getAllegiance()); // TODO: Remove allegiance
-		CFameManager::getInstance().setAndEnforceTribeFameCap(getId(), getAllegiance()); // TODO: Remove allegiance
+		CFameManager::getInstance().enforceFameCaps(getId(), getAllegiance());
+		CFameManager::getInstance().setAndEnforceTribeFameCap(getId(), getAllegiance());
 	}
 
 	for (uint i=0; i<CStaticFames::getInstance().getNbFame(); ++i)
 	{
 		// update player fame info
 		sint32 fame = fi.getFameIndexed(_Id, i, false, true);
-		sint32 maxFame = CFameManager::getInstance().getMaxFameByFactionIndex(getAllegiance(), i); // TODO: Remove allegiance
+		sint32 maxFame = CFameManager::getInstance().getMaxFameByFactionIndex(getAllegiance(), i);
 		setFameValuePlayer(i, fame, maxFame, 0);
 	}
 }
@@ -15279,7 +15224,7 @@ void CCharacter::syncContactListWithCharNameChanges(const std::vector<NLMISC::CE
 		sendContactListInit();
 }
 
-#ifdef RYZOM_FORGE_ROOM
+
 void CCharacter::setInRoomOfPlayer(const NLMISC::CEntityId &id)
 {
 	_inRoomOfPlayer = id;
@@ -15335,7 +15280,6 @@ void CCharacter::addRoomAccessToPlayer(const NLMISC::CEntityId &id)
 	uint32 playerId = PlayerManager.getPlayerId(id);
 	_RoomersList.push_back(id);
 }
-#endif
 
 //--------------------------------------------------------------
 //	CCharacter::addPlayerToFriendList()
@@ -15551,7 +15495,7 @@ void CCharacter::addPlayerToIgnoreList(const NLMISC::CEntityId &id)
 	// update ios state
 	uint32 playerId = PlayerManager.getPlayerId(id);
 	CPlayer *player = PlayerManager.getPlayer( playerId );
-	if ( (!player) || (!player->havePriv( ":SGM:GM:VG:SG:G:" )) ) // if online, messages from CSRs can't be ignored
+	if ( (!player) || (!player->havePriv( ":SGM:GM:VG:SG:G:EM:EG:" )) ) // if online, messages from CSRs can't be ignored
 	{
 		CEntityId senderId = getId();
 		CEntityId ignoredId = id;
@@ -15622,7 +15566,6 @@ void CCharacter::removePlayerFromIgnoreListByIndex(uint16 index)
 	sendMessageViaMirror ("IOS", msgName);
 }
 
-#ifdef RYZOM_FORGE_ROOM
 //--------------------------------------------------------------
 //	CCharacter::removeRoomAccesToPlayer()
 //--------------------------------------------------------------
@@ -15658,7 +15601,6 @@ void CCharacter::removeRoomAccesToPlayer(const NLMISC::CEntityId &id, bool kick)
 		}
 	}
 }
-#endif
 
 //--------------------------------------------------------------
 //	CCharacter::removePlayerFromFriendListByEntityId()
@@ -16132,7 +16074,7 @@ void CCharacter::online(bool onlineStatus)
 
 
 	// if the character has a CSR grade, remove from all ignore lists
-	if ( onlineStatus && (! _IsIgnoredBy.empty()) && havePriv( ":SGM:GM:VG:SG:G:" ) )
+	if ( onlineStatus && (! _IsIgnoredBy.empty()) && havePriv( ":SGM:GM:VG:SG:G:EM:EG:" ) )
 	{
 		CMessage msgout( "UNIGNORE_ALL" );
 		msgout.serial( _Id );
@@ -16322,16 +16264,13 @@ void CCharacter::onConnection()
 {
 	// Add all handledAIGroups for all missions of the player
 	spawnAllHandledAIGroup();
-	// Add character to event channel if event occurs
-	CGameEventManager::getInstance().addCharacterToChannelEvent( this );
 
-	// Update for the unified entity locator
+	// update for the unified entity locator
 	if (IShardUnifierEvent::getInstance() != NULL)
 	{
 		IShardUnifierEvent::getInstance()->charConnected(_Id, getLastDisconnectionDate());
 	}
 
-	// Notify PvP manager
 	CPVPManager2::getInstance()->playerConnects(this);
 }
 
@@ -17226,7 +17165,6 @@ void CCharacter::checkScoresValues( SCORES::TScores score, CHARACTERISTICS::TCha
 	sint32 base = (_PhysCharacs._PhysicalCharacteristics[ charac ].Base + PhysicalCharacteristicsBaseValue) * PhysicalCharacteristicsFactor + _ScorePermanentModifiers[ score ];
 	if(	_PhysScores._PhysicalScores[ score ].Base != base )
 	{
-		// TODO: What's this?
 		nlwarning("BADCHECK For player %s, for %s, player should have %u and he has %u !", _Id.toString().c_str(), SCORES::toString(score).c_str(), base, _PhysScores._PhysicalScores[ score ].Base);
 //vl		_PhysScores._PhysicalScores[ score ].Base = base;
 	}
@@ -17238,7 +17176,6 @@ void CCharacter::checkScoresValues( SCORES::TScores score, CHARACTERISTICS::TCha
 	baseRegenerateAction += RegenOffset;
 	if(	fabs((_PhysScores._PhysicalScores[ score ].BaseRegenerateRepos * 100.0f) - (100.0f * baseRegenerateRepos)) > 0.001)
 	{
-		// TODO: What's this?
 		nlwarning("BADCHECK For player %s, for %s regen, player should have %f and he has %f !", _Id.toString().c_str(), SCORES::toString(score).c_str(), baseRegenerateRepos, _PhysScores._PhysicalScores[ score ].BaseRegenerateRepos);
 //vl		_PhysScores._PhysicalScores[ score ].BaseRegenerateRepos = baseRegenerateRepos;
 //vl		_PhysScores._PhysicalScores[ score ].BaseRegenerateAction = baseRegenerateAction;
@@ -17304,7 +17241,6 @@ void CCharacter::checkCharacAndScoresValues()
 		// compare
 		if (_PhysCharacs._PhysicalCharacteristics[charac].Base != tvalue)
 		{
-			// TODO: What's this?
 			nlwarning("BADCHECK For player %s, for charac %s, player should have %u and he has %u !", _Id.toString().c_str(), CHARACTERISTICS::toString(charac).c_str(), tvalue,_PhysCharacs._PhysicalCharacteristics[charac].Base);
 
 //vl			_PhysCharacs._PhysicalCharacteristics[charac].Base = tvalue;
@@ -18768,9 +18704,7 @@ uint32 CPetAnimal::initLinkAnimalToTicket( CCharacter * c, uint8 index )
 		{
 //			Slot = ItemPtr->getLocSlot();
 			ItemPtr->setPetIndex(index);
-#ifdef RYZOM_FORGE_PET_NAME
-			ItemPtr->setPhraseIdInternal(CustomName, true);
-#endif
+			ItemPtr->setCustomName(CustomName);
 			Slot = ItemPtr->getInventorySlot();
 			return Slot;
 		}
@@ -18784,9 +18718,7 @@ uint32 CPetAnimal::initLinkAnimalToTicket( CCharacter * c, uint8 index )
 //				Slot = ItemPtr->getLocSlot();
 				Slot = ItemPtr->getInventorySlot();
 				ItemPtr->setPetIndex(index);
-#ifdef RYZOM_FORGE_PET_NAME
-				ItemPtr->setPhraseIdInternal(CustomName, true);
-#endif
+				ItemPtr->setCustomName(CustomName);
 				return Slot;
 			}
 			else
@@ -19512,7 +19444,7 @@ void CCharacter::setStartupInstance(uint32 instanceId)
 
 void CCharacter::setTitle( CHARACTER_TITLE::ECharacterTitle title )
 {
-	_Title = title;
+	setNewTitle(CHARACTER_TITLE::toString(title));
 }
 
 

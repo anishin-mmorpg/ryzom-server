@@ -55,10 +55,10 @@ public:
 		_Modifier1 = modifier1;
 		_Modifier2 = modifier2;
 
-		if( NLMISC::toLowerAscii(_DefenseMode) == "dodge" )
+		if( NLMISC::toLower(_DefenseMode) == "dodge" )
 			_PowerType = POWERS::ModDodgeSkill;
 		else
-		if( NLMISC::toLowerAscii(_DefenseMode) == "parry" )
+		if( NLMISC::toLower(_DefenseMode) == "parry" )
 			_PowerType = POWERS::ModParrySkill;
 		else
 			_PowerType = POWERS::ModDefenseSkill;

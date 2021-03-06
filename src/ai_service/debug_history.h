@@ -23,37 +23,36 @@ private:
 	typedef std::deque<std::string> THistoryContainer;
 public:
 	explicit CDebugHistory()
-	: m_Recording(false)
+	: _Recording(false)
 	{
 	}
 	virtual	~CDebugHistory() { }
 	void addHistory(std::string const& txt)
 	{
-		if (m_Recording)
-			m_History.push_back(txt);
+		if (_Recording)
+			_History.push_back(txt);
 	}
 	void addHistory(char const* txt)
 	{
-		if (m_Recording)
+		if (_Recording)
 			addHistory(NLMISC::toString(txt));
 	}
 	
 	template <class A>
-	void addHistory(char const* txt, A a) { if (m_Recording) addHistory(NLMISC::toString(txt, a)); }
+	void addHistory(char const* txt, A a) { if (_Recording) addHistory(NLMISC::toString(txt, a)); }
 	template <class A, class B>
-	void addHistory(char const* txt, A a, B b) { if (m_Recording) addHistory(NLMISC::toString(txt, a, b)); }
+	void addHistory(char const* txt, A a, B b) { if (_Recording) addHistory(NLMISC::toString(txt, a, b)); }
 	template <class A, class B, class C>
-	void addHistory(char const* txt, A a, B b, C c) { if (m_Recording) addHistory(NLMISC::toString(txt, a, b, c)); }
+	void addHistory(char const* txt, A a, B b, C c) { if (_Recording) addHistory(NLMISC::toString(txt, a, b, c)); }
 	template <class A, class B, class C, class D>
-	void addHistory(char const* txt, A a, B b, C c, D d) { if (m_Recording) addHistory(NLMISC::toString(txt, a, b, c, d)); }
+	void addHistory(char const* txt, A a, B b, C c, D d) { if (_Recording) addHistory(NLMISC::toString(txt, a, b, c, d)); }
 	
-	void setRecording(bool val) { m_Recording = val; }
-	inline bool isRecording() { return m_Recording; }
+	void setRecording(bool val) { _Recording = val; }
 	
 	void writeAsInfo()
 	{
 		int j = 0;
-		FOREACH(itHistory, THistoryContainer, m_History)
+		FOREACH(itHistory, THistoryContainer, _History)
 		{
 			nlinfo("HIST %3i: %s", j, itHistory->c_str());
 			++j;
@@ -61,8 +60,8 @@ public:
 	}
 	
 private:
-	bool m_Recording;
-	THistoryContainer m_History;
+	bool _Recording;
+	THistoryContainer _History;
 };
 
 #endif

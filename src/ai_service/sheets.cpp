@@ -395,7 +395,7 @@ void AISHEETS::CCreature::readGeorges(NLMISC::CSmartPtr<NLGEORGES::UForm> const&
 	// the form was found so read the true values from George
 	_SheetId = sheetId;
 #ifdef NL_DEBUG
-	nlassert(debugSheet.get().empty() || _SheetId!=NLMISC::CSheetId(debugSheet.get()));
+	nlassert(debugSheet.get().empty() || _SheetId!=NLMISC::CSheetId(debugSheet));
 #endif
 	
 	item.getValueByName(_Level,"Basics.Level");
@@ -677,7 +677,7 @@ void AISHEETS::CCreature::serial(NLMISC::IStream &s)
 {
 	s.serial(_SheetId, _Level);
 #ifdef NL_DEBUG
-	nlassert(debugSheet.get().empty() || _SheetId!=NLMISC::CSheetId(debugSheet.get()));
+	nlassert(debugSheet.get().empty() || _SheetId!=NLMISC::CSheetId(debugSheet));
 #endif
 	
 	s.serial(_DynamicGroupCountMultiplier);
@@ -828,7 +828,7 @@ void AISHEETS::CRaceStats::readGeorges(NLMISC::CSmartPtr<NLGEORGES::UForm> const
 	// the form was found so read the true values from George
 	_SheetId = sheetId;
 #ifdef NL_DEBUG
-	nlassert(debugSheet.get().empty() || _SheetId!=NLMISC::CSheetId(debugSheet.get()));
+	nlassert(debugSheet.get().empty() || _SheetId!=NLMISC::CSheetId(debugSheet));
 #endif
 	
 	item.getValueByName(_Race, "Race");
@@ -843,7 +843,7 @@ void AISHEETS::CRaceStats::serial(NLMISC::IStream &s)
 {
 	s.serial(_SheetId);
 #ifdef NL_DEBUG
-	nlassert(debugSheet.get().empty() || _SheetId!=NLMISC::CSheetId(debugSheet.get()));
+	nlassert(debugSheet.get().empty() || _SheetId!=NLMISC::CSheetId(debugSheet));
 #endif
 	
 	s.serial(_SheetId);
@@ -971,7 +971,7 @@ uint32 AISHEETS::CSheets::getGroupPropertiesIndex(const std::string &groupIndexN
 	if (groupIndexName.empty())
 		return	std::numeric_limits<uint32>::max();
 	
-	std::map<string, uint32>::iterator it = _NameToGroupIndex.find(NLMISC::toUpperAscii(groupIndexName));
+	std::map<string, uint32>::iterator it = _NameToGroupIndex.find(NLMISC::toUpper(groupIndexName));
 	if (it==_NameToGroupIndex.end())
 	{
 		uint32 groupIndex = (uint32)_NameToGroupIndex.size();

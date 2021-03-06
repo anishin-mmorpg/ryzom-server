@@ -51,7 +51,7 @@ class CShopTypeManager : public NLMISC::CEvalNumExpr
 {
 public:
 
-	enum TShopTypeSelected { StaticShopSelected = 0, DynamicShopSelected, AllShopSelected, InvalidShopSelected };
+	enum TShopTypeSelected { StaticShopSelected = 0, DynamicShopSelected, AllShopSelected };
 
 	/// init / release class
 	static void initShopBase();

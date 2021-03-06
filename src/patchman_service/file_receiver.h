@@ -50,7 +50,6 @@ namespace PATCHMAN
 		// ctor & init
 		CFileReceiver();
 		void init(NLNET::IModule* parent,const std::string& fileSpec="*/*");
-		void init(NLNET::IModule* parent,const std::vector<std::string> &fileSpecs);
 
 		// CModuleBase specialisation implementation
 		void onModuleUp(NLNET::IModuleProxy *module);
@@ -121,7 +120,7 @@ namespace PATCHMAN
 	private:
 		// private data -----------------------------------------------------------
 		NLNET::IModule* _Parent;
-		std::vector<NLMISC::CSString> _FileSpecs;
+		NLMISC::CSString _FileSpec;
 		CAdministeredModuleWrapper _AdministeredModuleWrapper;
 
 		// some handy data types

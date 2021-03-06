@@ -72,11 +72,6 @@ void CPVPManager2::init()
 	IPVPInterface * pvpFaction = new CPVPFaction();
 	BOMB_IF(pvpFaction == 0, "Can't allocate CPVPFaction", nlstop );
 	_Instance->_PVPInterface.push_back(pvpFaction);
-#ifdef RYZOM_EPISODE2_REACTIVATE
-	// add war between kami and karavan faction (must be controled by GM tools later
-	_Instance->addFactionWar(PVP_CLAN::Kami, PVP_CLAN::Karavan);
-#endif
-	
 	// instantiate pvp duel class
 	IPVPInterface * pvpDuel = new CPVPDuel();
 	BOMB_IF(pvpDuel == 0, "Can't allocate CPVPDuel", nlstop );
@@ -215,9 +210,6 @@ std::vector<TChanID> CPVPManager2::getCharacterChannels(CCharacter * user)
 	std::vector<TChanID> result;
 	result.clear();
 
-	// NOTE: It's better to just rely on user-made channels. -Kaetemi
-
-#ifdef RYZOM_FORGE
 	// Add lang channel, should be first.
 	if (!user->getLangChannel().empty())
 	{
@@ -240,19 +232,14 @@ std::vector<TChanID> CPVPManager2::getCharacterChannels(CCharacter * user)
 			result.push_back((*it).second);
 		}		
 	}
-#endif
 
-#ifdef RYZOM_FORGE
 	PVP_CLAN::TPVPClan faction = user->getAllegiance().first;
 	if( faction != PVP_CLAN::Neutral )
 	{
-		if (isFactionInWar(faction))
+		TMAPFactionChannel::iterator it = _FactionChannel.find(faction);
+		if( it != _FactionChannel.end() )
 		{
-			TMAPFactionChannel::iterator it = _FactionChannel.find(faction);
-			if (it != _FactionChannel.end())
-			{
-				result.push_back((*it).second);
-			}
+			result.push_back((*it).second);
 		}
 	}
 
@@ -265,7 +252,6 @@ std::vector<TChanID> CPVPManager2::getCharacterChannels(CCharacter * user)
 			result.push_back((*it).second);
 		}
 	}
-#endif
 
 	/*
 	bool matis = CFameInterface::getInstance().getFameIndexed(user->getId(), 0) >= PVPFameRequired*6000;

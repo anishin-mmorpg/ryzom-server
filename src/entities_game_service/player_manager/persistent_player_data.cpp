@@ -227,7 +227,7 @@ public:
 		else
 		{
 			STOP(NLMISC::toString("Failed to fit item loaded from input into inventory! (sheet=%s)",itm->getSheetId().toString().c_str()));
-			itm.deleteItem(); // FIXME: Log
+			itm.deleteItem();
 		}
 	}
 
@@ -414,11 +414,11 @@ static void prepareCharacterPositionForStore ( COfflineEntityState & state, cons
 	_FactionPoint[i],\
 	PVP_CLAN::TPVPClan k=PVP_CLAN::fromString(key); if ((k>=PVP_CLAN::BeginClans) && (k<=PVP_CLAN::EndClans)) _FactionPoint[k-PVP_CLAN::BeginClans]=val)\
 \
-	/*PROP(uint32,_PvpPoint)*/\
-	/*PROP2(_LangChannel,string,_LangChannel,_LangChannel=val)*/\
-	/*PROP(uint32,_Organization)*/\
-	/*PROP(uint32,_OrganizationStatus)*/\
-	/*PROP(uint32,_OrganizationPoints)*/\
+	PROP(uint32,_PvpPoint)\
+	PROP2(_LangChannel,string,_LangChannel,_LangChannel=val)\
+	PROP(uint32,_Organization)\
+	PROP(uint32,_OrganizationStatus)\
+	PROP(uint32,_OrganizationPoints)\
 	PROP2(DeclaredCult,string,PVP_CLAN::toString(_DeclaredCult),_DeclaredCult=PVP_CLAN::fromString(val))\
 	PROP2(DeclaredCiv,string,PVP_CLAN::toString(_DeclaredCiv),_DeclaredCiv=PVP_CLAN::fromString(val))\
 \
@@ -439,11 +439,11 @@ static void prepareCharacterPositionForStore ( COfflineEntityState & state, cons
 	PROP_GAME_CYCLE_COMP(_ForbidAuraUseStartDate)\
 	PROP_GAME_CYCLE_COMP(_ForbidAuraUseEndDate)\
 	PROP2(_Title, string, CHARACTER_TITLE::toString(getTitle()), setTitle(CHARACTER_TITLE::toCharacterTitle(val)))\
-	/*PROP2(_NewTitle, string, _NewTitle, _NewTitle=val)*/\
-	/*PROP2(_TagPvPA, string, _TagPvPA, _TagPvPA=val)*/\
-	/*PROP2(_TagPvPB, string, _TagPvPB, _TagPvPB=val)*/\
-	/*PROP2(_TagA, string, _TagA, _TagA=val)*/\
-	/*PROP2(_TagB, string, _TagB, _TagB=val)*/\
+	PROP2(_NewTitle, string, _NewTitle, _NewTitle=val)\
+	PROP2(_TagPvPA, string, _TagPvPA, _TagPvPA=val)\
+	PROP2(_TagPvPB, string, _TagPvPB, _TagPvPB=val)\
+	PROP2(_TagA, string, _TagA, _TagA=val)\
+	PROP2(_TagB, string, _TagB, _TagB=val)\
 \
 	/* Visual Properties */\
 	PROP2(HairType,				uint8, _VisualPropertyA().PropertySubData.HatModel,			SET_STRUCT_MEMBER(_VisualPropertyA,PropertySubData.HatModel,val))\
@@ -507,7 +507,7 @@ static void prepareCharacterPositionForStore ( COfflineEntityState & state, cons
 	STRUCT_VECT(_Pact)\
 	STRUCT_VECT(_KnownPhrases)\
 	STRUCT_MAP(TAIAlias,	TMissionHistory,	_MissionHistories)\
-	/*PROP_MAP(string,	string,	_CustomMissionsParams)*/\
+	PROP_MAP(string,	string,	_CustomMissionsParams)\
 	LSTRUCT(_WelcomeMissionDesc, if (_WelcomeMissionDesc.isValid()))\
 	STRUCT_ARRAY(_PlayerPets,_PlayerPets.size())\
 \
@@ -672,12 +672,6 @@ static void prepareCharacterPositionForStore ( COfflineEntityState & state, cons
 			stableAlias = stablePlace->getAlias();\
 	}\
 
-#ifdef RYZOM_FORGE
-#define PROP_PET_ANIMAL_CUSTOM_NAME() PROP2(CustomName, string, CustomName, CustomName = val)
-#else
-#define PROP_PET_ANIMAL_CUSTOM_NAME()
-#endif
-
 #define PERSISTENT_DATA\
 	FLAG0(CLEAR,clear())\
 	PROP2(TicketPetSheetId,CSheetId,TicketPetSheetId,\
@@ -706,7 +700,7 @@ static void prepareCharacterPositionForStore ( COfflineEntityState & state, cons
 	LPROP(bool,IsMounted,if(IsMounted))\
 	PROP(bool,IsTpAllowed)\
 	PROP(TSatiety,Satiety)\
-	PROP_PET_ANIMAL_CUSTOM_NAME()\
+	PROP2(CustomName, ucstring, CustomName, CustomName = val)\
 
 //#pragma message( PERSISTENT_GENERATION_MESSAGE )
 #include "game_share/persistent_data_template.h"
@@ -1339,14 +1333,16 @@ private:
 	FLAG0(CLEAR,clear())\
 	PROP2(_ItemId,						uint64,		_ItemId.getRawId(),			_ItemId = INVENTORIES::TItemId(val))\
 	PROP2(_SheetId,						CSheetId,	_SheetId,					_SheetId=val)\
+/*	PROP2(_LocSlot,						uint32,		_InventorySlot,				_InventorySlot=val)*/\
 	PROP2(_LocSlot,						uint32,		_InventorySlot,				applyArgs.InventorySlot=val)\
+	/*PROP2(_ClientInventoryPosition,	sint16,		_ClientInventoryPosition,	_ClientInventoryPosition=val)*/\
 	PROP2(_HP,							uint32,		_HP,						_HP=val)\
 	PROP2(_Recommended,					uint32,		_Recommended,				_Recommended=val)\
 	PROP2(_CreatorId,					CEntityId,	_CreatorId,					_CreatorId=val)\
-	PROP2(_PhraseId,					string,		getPhraseId(),				setPhraseIdInternal(val))\
-	LPROP2(_PhraseLiteral,				bool,		if (_PhraseLiteral),		_PhraseLiteral,						_PhraseLiteral=val)\
-	LSTRUCT2(_CraftParameters,						if (_CraftParameters),		_CraftParameters->store(pdr),		_CraftParameters = new CItemCraftParameters; _CraftParameters->apply(pdr))\
-	LPROP2(_SlotImage,					uint16,		if (0),						0xffff,								slotImage=val) /* Very old version compatibility */ \
+	PROP2(_PhraseId,					string,		_PhraseId,					_PhraseId=val)\
+	PROP2(_RequiredFaction,				string,		_RequiredFaction,			_RequiredFaction=val)\
+	LSTRUCT2(_CraftParameters,						if (_CraftParameters != NULL),	_CraftParameters->store(pdr),	_CraftParameters = new CItemCraftParameters; _CraftParameters->apply(pdr))\
+	LPROP2(_SlotImage,					uint16,		if (0),		0xffff,				slotImage=val)\
 	LPROP2(_SapLoad,					uint32,		if (_SapLoad!=0),			_SapLoad,							_SapLoad=val)\
 	LPROP2(_Dropable,					bool,		if (!_Dropable),			_Dropable,							_Dropable=val)\
 	LPROP2(_Destroyable,				bool,		if (!_Destroyable),			_Destroyable,						_Destroyable=val)\
@@ -1362,13 +1358,12 @@ private:
 	LPROP2(_RequiredCharacLevel,		uint16,		if (_RequiredCharacLevel!=0),_RequiredCharacLevel,				_RequiredCharacLevel=val)\
 	STRUCT_VECT(_TypeSkillMods)\
 	LPROP_VECT(CSheetId, _Enchantment, VECT_LOGIC(_Enchantment) if (_Enchantment[i]!=CSheetId::Unknown))\
-	PROP2(_CustomText,					string,									getCustomText(),					setCustomText(val))\
-	LPROP2(_CustomName,					string,		if (false),					string(),							setPhraseIdInternal(val, true)) /* Ryzom Forge compatibility, replaced by _PhraseLiteral */ \
-	LPROP(bool, _Movable, if (!_Movable))\
-	LPROP(bool, _UnMovable, if (!_UnMovable))\
-	LPROP(bool, _LockedByOwner, if (!_LockedByOwner))\
-	LPROP2(_AccessGrade,				string,		if (_AccessGrade != DefaultAccessGrade), CGuildGrade::toString(_AccessGrade), _AccessGrade = CGuildGrade::fromString(val); if (_AccessGrade == CGuildGrade::Unknown) _AccessGrade = DefaultAccessGrade)\
-
+	PROP2(_CustomText,					ucstring,	_CustomText,				_CustomText=val)\
+	PROP2(_CustomName,					ucstring,	_CustomName,				_CustomName=val)\
+	PROP(bool, _Movable)\
+	PROP(bool, _UnMovable)\
+	PROP(bool, _LockedByOwner)\
+	
 //#pragma message( PERSISTENT_GENERATION_MESSAGE )
 #include "game_share/persistent_data_template.h"
 
@@ -1403,7 +1398,7 @@ private:
 	LPROP(float,MaxSlashingProtection,if (MaxSlashingProtection!=0.0f))\
 	LPROP(float,MaxBluntProtection,if (MaxBluntProtection!=0.0f))\
 	LPROP(float,MaxPiercingProtection,if (MaxPiercingProtection!=0.0f))\
-	LPROP(uint8,Color,if (Color!=CGameItem::DefaultColor))\
+	LPROP(uint8,Color,if (Color!=1))\
 	LPROP(sint32,HpBuff,if (HpBuff!=0))\
 	LPROP(sint32,SapBuff,if (SapBuff!=0))\
 	LPROP(sint32,StaBuff,if (StaBuff!=0))\

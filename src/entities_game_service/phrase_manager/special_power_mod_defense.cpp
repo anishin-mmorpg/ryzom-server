@@ -74,7 +74,6 @@ void CSpecialPowerModDefense::apply()
 			effectFamily = EFFECT_FAMILIES::PowerModDefenseSkill;
 			break;
 		default:
-			effectFamily = EFFECT_FAMILIES::Unknown;
 			break;
 	}
 	

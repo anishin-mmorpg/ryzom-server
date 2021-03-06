@@ -397,9 +397,8 @@ CKnapsackSolver::CKnapsackSolver(IKnapsackContext* context, bool* _take)
 {
 	if (_take==NULL && size()!=0)
 	{
-		size_t sz = size();
-		_Take = new bool[sz];
-		for (size_t i = 0; i < sz; ++i)
+		_Take = new bool[size()];
+		for (size_t i=0; i<size(); ++i)
 			_Take[i] = false;
 	}
 	else

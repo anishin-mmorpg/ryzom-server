@@ -94,6 +94,7 @@ public:
 
 	// Get item form map reference
 	static inline const CAllStaticItems& getItemMapForm() { return _StaticSheets._StaticItems; }
+	static inline CAllStaticItems& getItemMapFormNoConst() { return _StaticSheets._StaticItems; }
 	
 	// Get form for brick
 //	static const CStaticGameBrick* getBrickForm( const NLMISC::CSheetId& sheetId );

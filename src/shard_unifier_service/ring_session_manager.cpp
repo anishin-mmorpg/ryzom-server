@@ -584,7 +584,7 @@ namespace RSMGR
 			for (uint i=0; i<userAccessPriv.size(); ++i)
 			{
 				string access("ds_");
-				access += toLowerAscii(userAccessPriv[i]);
+				access += toLower(userAccessPriv[i]);
 
 				if (accessLevel.toString() == access)
 					return true;
@@ -996,12 +996,12 @@ restartLoop:
 			if (authorCharId != 0)
 			{
 				author = CCharacter::load(_RingDb, authorCharId, __FILE__, __LINE__);
-				BOMB_IF(author == NULL, "Failed to load the scenario author character " << authorCharId, return;);
+				BOMB_IF(author == NULL, "Failed to load the scenario author character "<<authorCharId, return;)
 			}
 
 			// load the animator
 			CCharacterPtr animator = CCharacter::load(_RingDb, session->getOwnerId(), __FILE__, __LINE__);
-			BOMB_IF(animator == NULL, "Failed to load the scenario animator character " << session->getOwnerId(), return;);
+			BOMB_IF(animator == NULL, "Failed to load the scenario animator character "<<session->getOwnerId(), return;)
 
 			// try to load an existing scenario record
 			CScenarioPtr scenario;
@@ -1127,12 +1127,12 @@ restartLoop:
 			if (authorCharId != 0)
 			{
 				author = CCharacter::load(_RingDb, authorCharId, __FILE__, __LINE__);
-				BOMB_IF(author == NULL, "Failed to load the scenario author character " << authorCharId, return;);
+				BOMB_IF(author == NULL, "Failed to load the scenario author character "<<authorCharId, return;)
 			}
 
 			// load the animator
 			CCharacterPtr animator = CCharacter::load(_RingDb, session->getOwnerId(), __FILE__, __LINE__);
-			BOMB_IF(animator == NULL, "Failed to load the scenario animator character " << session->getOwnerId(), return;);
+			BOMB_IF(animator == NULL, "Failed to load the scenario animator character "<<session->getOwnerId(), return;)
 
 			// try to load an existing scenario record
 			CScenarioPtr scenario;
@@ -1983,7 +1983,7 @@ endOfWelcomeUserResult:
 							// check the permission of the player
 							for (uint i=0; i<userAccessPriv.size(); ++i)
 							{
-								if (_DontUsePerm || string("ds_")+toLowerAscii(userAccessPriv[i]) == shard->getRequiredState().toString())
+								if (_DontUsePerm || string("ds_")+toLower(userAccessPriv[i]) == shard->getRequiredState().toString())
 								{
 									// ok, this one is accessible
 									// this server is better (i.e had less player in it)
@@ -3115,7 +3115,7 @@ endOfWelcomeUserResult:
 			for (uint i=0; i<session->getSessionParticipants().size(); ++i)
 			{
 				const CSessionParticipantPtr &part = session->getSessionParticipantsByIndex(i);
-				BOMB_IF(part == NULL, "RSM:on_unsubsribeSession : error accessing participants at index " << i << ", part is NULL", invokeResult(from, charId >> 4, 4, "failed to accesss participants record"); return);
+				BOMB_IF(part == NULL, "RSM:on_unsubsribeSession : error accessing participants at index "<<i<<", part is NULL", invokeResult(from, charId>>4, 4, "failed to accesss participants record"); return)
 
 				if (part->getCharId() == charId
 					&& part->getStatus() == TSessionPartStatus::sps_play_subscribed)
@@ -4323,7 +4323,7 @@ endOfWelcomeUserResult:
 				}
 			}
 
-			TAccessLevel al = string("ds_")+toLowerAscii(args[1]);
+			TAccessLevel al = string("ds_")+toLower(args[1]);
 			if (al == TAccessLevel::invalid_val)
 			{
 				log.displayNL("Invalid access state '%s'", args[1].c_str());

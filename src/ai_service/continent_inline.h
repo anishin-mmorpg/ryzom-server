@@ -695,7 +695,7 @@ static CAIVector randomPos(double dispersionRadius)
 	{
 		return CAIVector(0., 0.);
 	}
-	static const uint32 maxLimit = std::numeric_limits<uint32>::max() >> 1;
+	uint32 const maxLimit=(std::numeric_limits<uint32>::max())>>1;
 	double rval = (double)CAIS::rand32(maxLimit)/(double)maxLimit; // [0-1[
 	double r = dispersionRadius*sqrt(rval);
 	rval = (double)CAIS::rand32(maxLimit)/(double)maxLimit; // [0-1[
@@ -1053,7 +1053,7 @@ DEFINE_ACTION_TEMPLATE1(ContextGroupDesc,GT_GPRM,FamilyT)
 		std::string param;
 		args[i].get(param);
 		
-		param = NLMISC::toLowerAscii(param);
+		param = NLMISC::toLower(param);
 		
 		if	(	param == "contact camp"
 			||	param == "contact outpost"

@@ -1577,15 +1577,12 @@ void CEntityBase::serial(NLMISC::IStream &f)
 		{
 			// select starting point
 			RYZOM_STARTING_POINT::TStartPoint sp;
-
-#ifdef RYZOM_FORGE
 //			if(UseNewNewbieLandStartingPoint)
-//			{
+			{
 				sp= RYZOM_STARTING_POINT::starting_city;
-//			}
-//			else
-#else
-//			{
+			}
+/*			else
+			{
 				switch( _Race )
 				{
 					case EGSPD::CPeople::Fyros:
@@ -1603,9 +1600,8 @@ void CEntityBase::serial(NLMISC::IStream &f)
 					default:
 						sp = RYZOM_STARTING_POINT::aegus;
 				}
-//			}
-#endif
-
+			}
+*/
 			// set the character initial state
 			TAIAlias bot,mission;
 			const CTpSpawnZone * zone = CZoneManager::getInstance().getStartPoint( (uint16)sp,bot,mission );
